@@ -2,111 +2,106 @@
   <v-app light>
     <v-navigation-drawer
       persistent
-      :mini-variant="miniVariant"
-      :clipped="clipped"
+      clipped
+      fixed
       v-model="drawer"
       enable-resize-watcher
     >
       <v-list>
         <v-list-tile
-          value="true"
           v-for="(item, i) in items"
           :key="i"
         >
           <v-list-tile-action>
-            <v-icon light v-html="item.icon"></v-icon>
+            <v-icon v-html="item.icon"></v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title v-text="item.title"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
+
+      <!--文档列表菜单-->
+      <v-list>
+        <v-list-group value="true" v-if="store.menus">
+          <v-list-tile slot="item" ripple>
+            <v-list-tile-action>
+              <v-icon>{{ store.menus.icon||"folder" }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>{{ store.menus.title }}</v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-icon>keyboard_arrow_down</v-icon>
+            </v-list-tile-action>
+          </v-list-tile>
+
+          <v-list-tile v-for="subItem in store.menus.list"
+                       :key="subItem.title"
+                       ripple
+                       :value="subItem.file==$route.params.name"
+                       @click="$router.push({path:`/doc/${store.menus.dir}/${subItem.file}`})">
+
+            <v-list-tile-content>
+              <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list-group>
+      </v-list>
+
     </v-navigation-drawer>
-    <v-toolbar fixed>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" light></v-toolbar-side-icon>
-      <v-btn
-        icon
-        light
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        light
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        light
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+    <v-toolbar  fixed :class="store.menus.toolbarClass||''" :dark="!store.menus.light" v-show="show">
+      <v-toolbar-side-icon @click.stop="drawer = !drawer" ></v-toolbar-side-icon>
+      <v-toolbar-title v-text="store.title"></v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn
-        icon
-        light
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>menu</v-icon>
-      </v-btn>
+      <v-btn icon v-if="store.menus.git" :href="store.menus.git"><v-icon>fa-github</v-icon></v-btn>
     </v-toolbar>
     <main>
       <v-container fluid>
         <v-slide-y-transition mode="out-in">
-          <v-layout column align-center>
-            <img src="/static/v.png" alt="Vuetify.js" class="mb-5">
-            <blockquote>
-              &#8220;First, solve the problem. Then, write the code.&#8221;
-              <footer>
-                <small>
-                  <em>&mdash;John Johnson</em>
-                </small>
-              </footer>
-            </blockquote>
-          </v-layout>
+          <router-view></router-view>
         </v-slide-y-transition>
+        <copy-right></copy-right>
       </v-container>
     </main>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-    >
-      <v-list>
-        <v-list-tile @click="right = !right">
-          <v-list-tile-action>
-            <v-icon light>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed">
-      <span>&copy; 2017</span>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
+  import CopyRight from "./components/CopyRight.vue"
   export default {
+    components: {
+      CopyRight
+    },
     data () {
       return {
         clipped: false,
-        drawer: true,
-        fixed: false,
+        drawer: false,
         items: [
-          { icon: 'bubble_chart', title: 'Inspire' }
+          { icon: 'home', title: '主页' }
         ],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: 'Vuetify.js'
+        store: store,
+        show:false,
       }
+    },
+    created(){
+      axios.get("/static/list.json").then(d=>{
+        store.menus=d.data.filter(e=>{
+          if(e.dir===this.$route.params.path) return e;
+        })[0];
+        setTimeout(()=>{
+          this.show=true;
+        },18);
+        store.title=store.menus&&store.menus.pageTitle||"文档中心";
+        document.getElementsByTagName('title')[0].innerText=store.title;
+      })
     }
   }
 </script>
+<style lang="stylus">
+  @import "./stylus/main.styl"
+  body{
+    font-family 'Source Sans Pro', 'Helvetica Neue','Roboto', Arial, sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+  }
+</style>

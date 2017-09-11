@@ -1,0 +1,122 @@
+<template>
+  <div class="md" v-html="content"></div>
+</template>
+<style lang="stylus">
+  @import "../stylus/main.styl"
+  .md {
+    font-size: 15px;
+    color: rgb(52, 73, 94);
+    line-height :1.6em;
+    h1, h2, h3, h4 {
+      font-weight: bold;
+      color: #2c3e50;
+      margin-left: -3px;
+      line-height :1.6em;
+    }
+
+    hr {
+      border: 0;
+      background-color: #eee;
+      height: 1px;
+      margin: 16px 0;
+    }
+
+    h1 {
+      font-size: 30px;
+      border-bottom: #eee 1px solid;
+      padding-bottom: 8px;
+    }
+    h2 {
+      font-size: 24px;
+      border-bottom: #eee 1px solid;
+      padding-bottom: 8px;
+    }
+    h3 {
+      font-size: 20px;
+    }
+    h4 {
+      font-size: 16px;
+    }
+    blockquote {
+      border-left-color: $theme.primary;
+      padding: 16px 10px 16px 24px;
+      margin: 24px 3px;
+      background: #f3f3f3;
+      font-size: 15px;
+      font-weight :normal;
+      border-bottom-right-radius: 2px;
+      border-top-right-radius: 2px;
+      p {
+        margin: 0;
+      }
+    }
+    ol, ul {
+      margin: 20px 0;
+    }
+    li {
+      line-height: 2em;
+    }
+    pre {
+      position: relative;
+      margin-bottom: 24px;
+      border-radius: 3px;
+      background-color: #f6fb6f6;
+      white-space: pre;
+    }
+    code {
+      display: block;
+      padding: 12px 24px;
+      font-family: "SFMono-Regular", Menlo, 'Roboto Mono', Monaco, courier, monospace;
+      font-size: 13px;
+      -webkit-font-smoothing: initial;
+      background-color: #f6f6f6 !important;
+      line-height: 20px;
+      margin: 10px 0;
+      white-space: pre;
+      overflow-x: auto
+    }
+    code:after, code:before, kbd:after, kbd:before {
+      content: "" !important;
+    }
+    table {
+      border: #ccc 1px solid;
+      margin-bottom: 10px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th {
+      border: #ccc 1px solid;
+      text-align: left;
+      background: #eee;
+      padding: 8px 12px;
+
+    }
+    td {
+      border: #ccc 1px solid;
+      padding: 8px 12px;
+    }
+    tr:nth-child(even) {
+      background-color #f6f6f6
+    }
+
+  }
+
+
+</style>
+<script>
+  var marked = require('marked');
+  marked.setOptions({
+    breaks: true,
+    highlight: function (code) {
+      return hljs.highlightAuto(code).value;
+    }
+  });
+  export default {
+    props: ["data"],
+    computed: {
+      content() {
+        return marked(this.data || "");
+      }
+    }
+  }
+</script>
