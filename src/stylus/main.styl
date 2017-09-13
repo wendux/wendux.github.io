@@ -1,2 +1,12 @@
 /** Stylus Styles */
-@import '../../node_modules/vuetify/src/stylus/main'
+@import '~vuetify/src/stylus/settings/_colors.styl'
+$theme := {
+  primary: $teal.base
+  accent: $teal.base
+  secondary: $grey.darken-3
+  info: $blue.base
+  warning: $amber.base
+  error: $red.darken-3
+  success: $green.darken-1
+}
+@import '~vuetify/src/stylus/main'

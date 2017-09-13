@@ -2,7 +2,6 @@
   "title":"文档列表",
   "pageTitle":"AMOS帮助文档",
   "git":"",
-  "toolbarClass":"teal",
   "icon":"",
   "list":[
     {"title":"帮助文档","file":"readme"}

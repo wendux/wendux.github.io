@@ -15,15 +15,23 @@
     data: () => ({
       data: ""
     }),
-    created: function () {
-      var path = this.$route.params.path;
-      var name = this.$route.params.name;
-      axios.get(`/static/doc/${path}/${name}.md`).then(d => {
-        this.data = d.data;
-      }).catch(e => {
-        alert(e.msg);
-      })
+    beforeRouteUpdate(to,from,next){
+      this.load(to)
+      next()
     },
-    methods: {}
+    created: function () {
+      this.load(this.$route)
+    },
+    methods: {
+      load(route){
+        var path = route.params.path;
+        var name = route.params.name;
+        axios.get(`/static/doc/${path}/${name}.md`).then(d => {
+          this.data = d.data;
+        }).catch(e => {
+          alert(e.msg);
+        })
+      }
+    }
   }
 </script>

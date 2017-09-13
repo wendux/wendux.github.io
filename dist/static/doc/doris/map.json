@@ -1,0 +1,12 @@
+{
+  "title":"文档列表",
+  "pageTitle":"DORIS帮助文档",
+  "git":"",
+  "icon":"",
+  "list":[
+    {"title":"doris简介","file":"intro"},
+    {"title":"数据模版定义","file":"data-mock"},
+    {"title":"数据占位符","file":"placeholder"},
+    {"title":"接口验证","file":"validate"}
+  ]
+}

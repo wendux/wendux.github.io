@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import MarkdownPage from '../components/MarkdownPage.vue'
+import Document from '../components/pages/Document.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -12,9 +13,14 @@ export default new Router({
       component: Hello
     },
     {
-      path: '/doc/:path/:name',
-      name: 'doc',
-      component: MarkdownPage
+      path: '/doc', component:Document,
+      children:[
+        {
+          path: ':path/:name',
+          component: MarkdownPage
+        }
+      ]
+
     }
   ]
 })

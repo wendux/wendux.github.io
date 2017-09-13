@@ -40,14 +40,21 @@
     blockquote {
       border-left-color: $theme.primary;
       padding: 16px 10px 16px 24px;
-      margin: 24px 3px;
+      margin: 24px 0px;
       background: #f3f3f3;
       font-size: 15px;
       font-weight :normal;
+      /*color:#214750;*/
       border-bottom-right-radius: 2px;
       border-top-right-radius: 2px;
       p {
         margin: 0;
+      }
+    }
+    @media screen and (max-width: 900px){
+      blockquote {
+        padding: 8px 10px 8px 15px;
+        font-size :14px;
       }
     }
     ol, ul {
@@ -68,12 +75,13 @@
       padding: 12px 24px;
       font-family: "SFMono-Regular", Menlo, 'Roboto Mono', Monaco, courier, monospace;
       font-size: 13px;
+      font-weight :normal !important;
       -webkit-font-smoothing: initial;
       background-color: #f6f6f6 !important;
-      line-height: 20px;
+      line-height: 1.8em;
       margin: 10px 0;
       white-space: pre;
-      overflow-x: auto
+      overflow-x: auto,
     }
     code:after, code:before, kbd:after, kbd:before {
       content: "" !important;
@@ -108,7 +116,8 @@
   marked.setOptions({
     breaks: true,
     highlight: function (code) {
-      return hljs.highlightAuto(code).value;
+      return hljs.highlight("javascript",code,true).value;
+      //return hljs.highlightAuto(code).value;
     }
   });
   export default {
