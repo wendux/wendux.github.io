@@ -81,15 +81,16 @@
       line-height: 1.8em;
       margin: 10px 0;
       white-space: pre;
-      overflow-x: auto,
+      overflow-x: auto;
     }
     code:after, code:before, kbd:after, kbd:before {
       content: "" !important;
     }
     table {
-      border: #ccc 1px solid;
       margin-bottom: 10px;
       width: 100%;
+      display:block;
+      overflow :auto;
       border-collapse: collapse;
     }
     th {
