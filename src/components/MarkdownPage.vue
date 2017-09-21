@@ -30,7 +30,7 @@
           this.data = d.data;
           document.body.scrollTop=0
         }).catch(e => {
-          alert(e.msg);
+          alert(e.message);
         })
       }
     }
