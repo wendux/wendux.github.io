@@ -30,9 +30,12 @@
       font-size: 24px;
       border-bottom: #eee 1px solid;
       padding-bottom: 8px;
+      margin-bottom :30px;
+      padding-top :30px;
     }
     h3 {
       font-size: 20px;
+      padding : 10px 0;
     }
     h4 {
       font-size: 16px;
@@ -76,9 +79,10 @@
       font-family: "SFMono-Regular", Menlo, 'Roboto Mono', Monaco, courier, monospace;
       font-size: 13px;
       font-weight :normal !important;
-      -webkit-font-smoothing: initial;
       background-color: #f6f6f6 !important;
+      -webkit-font-smoothing: initial;
       line-height: 1.8em;
+      color : inherit;
       margin: 10px 0;
       white-space: pre;
       overflow-x: auto;
@@ -106,6 +110,16 @@
     }
     tr:nth-child(even) {
       background-color #f6f6f6
+    }
+    @media screen and (max-width: 600px) {
+      blockquote {
+        padding: 8px 10px 8px 15px;
+        font-size: 14px;
+      }
+      code {
+        font-size : 12px;
+        padding :12px;
+      }
     }
 
   }

@@ -6,19 +6,19 @@ import './stylus/main.styl'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+var Fly=require("flyio/dist/fly")
 Vue.use(Vuetify)
 Vue.config.productionTip = false
-
 Object.assign(window,{
   log:console.log.bind(console),
-  axios,
+  fly:new Fly,
+  Fly,
   bus:new Vue(),
   store:{
     title:"",
     menus:[],
   }
 })
-
 
 /* eslint-disable no-new */
 new Vue({

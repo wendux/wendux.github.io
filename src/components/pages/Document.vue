@@ -85,7 +85,7 @@
       }
     },
     created(){
-      axios.get("/static/list.json").then(d=>{
+      fly.get("/static/list.json").then(d=>{
         store.menus=d.data.filter(e=>{
           if(e.dir===this.$route.params.path) return e;
         })[0];

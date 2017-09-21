@@ -26,8 +26,9 @@
       load(route){
         var path = route.params.path;
         var name = route.params.name;
-        axios.get(`/static/doc/${path}/${name}.md`).then(d => {
+        fly.get(`/static/doc/${path}/${name}.md`).then(d => {
           this.data = d.data;
+          document.body.scrollTop=0
         }).catch(e => {
           alert(e.msg);
         })
