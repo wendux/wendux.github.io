@@ -9,8 +9,10 @@
     >
       <v-list>
         <v-list-tile
+          ripple
           v-for="(item, i) in items"
           :key="i"
+          @click.native="go(item)"
         >
           <v-list-tile-action>
             <v-icon v-html="item.icon"></v-icon>
@@ -40,7 +42,7 @@
                        :key="subItem.title"
                        ripple
                        :value="subItem.file==$route.params.name"
-                       @click="$router.push({path:`/doc/${store.menus.dir}/${subItem.file}`})">
+                       @click.native="$router.push({path:`/doc/${path}/${subItem.file}`})">
 
             <v-list-tile-content>
               <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
@@ -82,19 +84,30 @@
         ],
         store: store,
         show:false,
+        path:""
       }
     },
     created(){
-      fly.get("/static/list.json").then(d=>{
-        store.menus=d.data.filter(e=>{
-          if(e.dir===this.$route.params.path) return e;
-        })[0];
+      this.path=this.$route.params.path;
+      fly.get(`/static/doc/${this.path}/map.json`).then(d=>{
+        store.menus=d.data;
+        console.log(d.data.menus)
+        this.items=this.items.concat(d.data.menus);
         setTimeout(()=>{
           this.show=true;
         },18);
         store.title=store.menus&&store.menus.pageTitle||"文档中心";
         document.getElementsByTagName('title')[0].innerText=store.title;
       })
+    },
+    methods:{
+      go(item){
+        if(item.route.startsWith("http")){
+          location.href=item.route;
+        }else{
+          this.$router.push({path:item.route})
+        }
+      }
     }
   }
 </script>

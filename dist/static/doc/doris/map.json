@@ -3,6 +3,7 @@
   "pageTitle":"DORIS帮助文档",
   "git":"https://github.com/wendux",
   "icon":"",
+  "toolbarClass":"cyan darken-2",
   "list":[
     {"title":"doris简介","file":"intro"},
     {"title":"数据模版定义","file":"data-mock"},

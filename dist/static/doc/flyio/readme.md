@@ -2,16 +2,15 @@
 
 Fly.js 是一个基于 promise 的，轻量且强大的Javascript http 网络库，它有如下特点：
 
-1. 同时支持浏览器和 node 环境。
-2. 支持 Promise API
-3. 支持请求／响应拦截器
-4. 自动转换 JSON 数据
-5. **可以随意切换底层 http engine， 在浏览器环境中默认使用 XMLHttpRequest**
-6. **h5页面内嵌到原生 APP 中，可以将 http 请求转发到 Native，在端上统一发起网络请求、进行 cookie 管理、证书验证。**
-7. 内嵌到APP时，通过native engine 可以直接请求图片数据。
-8. node下支持文件下载／上传、http代理等本地增强功能。
-9. 高度可定制。
-10. **非常非常轻量**。
+1. 支持 Promise API。
+2. 支持浏览器环境，**轻量且非常轻量** 。
+3. 支持 Node，node下支持文件下载／上传、http代理等增强功能。
+4. 支持请求／响应拦截器。
+5. 自动转换 JSON 数据。
+6. **支持切换底层 http engine**。
+7. **浏览器端支持全局Ajax拦截 。**
+8. **H5页面内嵌到原生 APP 中，支持将 http 请求转发到 Native，支持直接请求图片**。
+9. **高度可定制、可拆卸、可拼装。**
 
 ## 官网
 
@@ -39,7 +38,7 @@ https://unpkg.com/flyio/dist/fly.umd.min.js
 
 ## 例子
 
-下面示例如无特殊说明，则在浏览器和node环境下都能正常执行。
+下面示例如无特殊说明，则在浏览器和node环境下都能执行。
 
 ### 发起GET请求
 
@@ -103,7 +102,7 @@ fly.all([getUserRecords(), getUserProjects()])
   })
 ```
 
-### 直接通过request api发起请求
+### 直接通过 request 接口发起请求
 
 ```javascript
 //直接调用request函数发起post请求
@@ -125,6 +124,18 @@ fly.request("/test",{hh:5},{
 ```
 
 注：Fly目前只在支持FormData的浏览器环境中支持FormData，node环境下对formData的支持方式稍有不同，详情戳这里 [Node 下增强的API ](#/doc/flyio/node)。
+
+### 请求二进制数据
+
+```javascript
+fly.get("/Fly/v.png",null,{
+	responseType:"arraybuffer"
+}).then(d=>{
+  //d.data 为ArrayBuffer实例
+})
+```
+
+注：在浏览器中时 responseType 值可为 "arraybuffer" 或"blob"之一。在node下只需设为 "stream"即可。
 
 ## 拦截器
 
@@ -165,7 +176,7 @@ fly.interceptors.response.use(null,null)
 
 ## 错误处理
 
-请求失败之后，catch捕获到的err为Error的一个实例，有两个字段
+请求失败之后，catch 捕获到的 err 为 Error 的一个实例，有两个字段
 
 ```javascript
 {
@@ -228,6 +239,36 @@ fly.request("/test",{hh:5},{
 
 
 
+## API
+
+#### fly.get(url, data, options)
+
+发起 get 请求，url请求地址，data为请求数据，在浏览器环境下类型可以是: **String|Json|Object|Array|Blob|ArrayBuffer|FormData**
+
+options为请求配置项。
+
+#### fly.post(url, data, options)
+
+发起post请求，参数含义同fly.get。
+
+#### fly.request(url, data, options)
+
+发起请求，参数含义同上，在使用此API时需要指定options 的method：
+
+```javascript
+//GET请求
+fly.request("/user/8" null, {method:"get"})
+//DELETE 请求
+fly.request("/user/8/delete", null, {method:"delete"})
+//PUT请求
+fly.request("/user/register", {name:"doris"}, {method:"PUT"})
+......
+```
+
+request 适合在 [RESTful API](http://en.wikipedia.org/wiki/Representational_state_transfer) 的场景下使用。
+
+
+
 ## 创建Fly实例
 
 为方便使用，在引入flyio库之后，会创建一个默认实例，一般情况下大多数请求都是通过默认实例发出的，但在一些场景中需要多个实例（可能使用不同的配置请求），这时你可以手动new一个：
@@ -249,11 +290,13 @@ Fly 引入了Http engine 的概念，所谓 Http engine，就是真正发起http
 
 
 
+## 全局Ajax拦截
+
+在浏览器中，可以通过用 Fly  engine 替换 XMLHttpRequest 的方式拦截**全局**的的 Ajax 请求，无论上层使用的是何种网络库。
+
 ## 体积
 
 Fly 非常轻量，min 只有 4.6K 左右，GZIP 压缩后不到 2K, 体积是 axios 的四分之一。
-
-
 
 ## Finally 
 
