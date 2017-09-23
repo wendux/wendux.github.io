@@ -18,19 +18,19 @@ Fly.js 是一个基于 promise 的，轻量且强大的Javascript http 网络库
 
 ## 安装
 
-### 使用npm
+### 使用NPM
 
 ```shell
 npm install flyio
 ```
 
-### 使用cdn
+### 使用CDN
 
 ```javascript
 <script src="https://unpkg.com/flyio/dist/fly.min.js"></script>
 ```
 
-### umd
+### UMD
 
 ```http
 https://unpkg.com/flyio/dist/fly.umd.min.js
@@ -102,7 +102,7 @@ fly.all([getUserRecords(), getUserProjects()])
   })
 ```
 
-### 直接通过 request 接口发起请求
+### 直接通过 `request` 接口发起请求
 
 ```javascript
 //直接调用request函数发起post请求
@@ -114,7 +114,7 @@ fly.request("/test",{hh:5},{
 .catch((e) => console.log("error", e))
 ```
 
-### 发送FormData
+### 发送 `FormData`
 
 ```javascript
  var formData = new FormData();
@@ -123,7 +123,7 @@ fly.request("/test",{hh:5},{
  fly.post("../package.json",formData).then(log).catch(log)
 ```
 
-注：Fly目前只在支持FormData的浏览器环境中支持FormData，node环境下对formData的支持方式稍有不同，详情戳这里 [Node 下增强的API ](#/doc/flyio/node)。
+注：Fly目前只在支持 `FormData` 的浏览器环境中支持 `FormData`，node环境下对  `formData` 的支持方式稍有不同，详情戳这里 [Node 下增强的API ](#/doc/flyio/node)。
 
 ### 请求二进制数据
 
@@ -135,7 +135,7 @@ fly.get("/Fly/v.png",null,{
 })
 ```
 
-注：在浏览器中时 responseType 值可为 "arraybuffer" 或"blob"之一。在node下只需设为 "stream"即可。
+注：在浏览器中时 `responseType` 值可为 "arraybuffer" 或"blob"之一。在node下只需设为 "stream"即可。
 
 ## 拦截器
 
@@ -176,7 +176,7 @@ fly.interceptors.response.use(null,null)
 
 ## 错误处理
 
-请求失败之后，catch 捕获到的 err 为 Error 的一个实例，有两个字段
+请求失败之后，`catch` 捕获到的 err 为 Error 的一个实例，有两个字段
 
 ```javascript
 {
@@ -226,7 +226,7 @@ fly.config.baseURL="https://wendux.github.io/"
 
 ### 单次请求配置
 
-需要对单次请求配置时，需使用request方法，配置只对当次请求有效。
+需要对单次请求配置时，需使用`request`方法，配置只对当次请求有效。
 
 ```javascript
 fly.request("/test",{hh:5},{
@@ -241,17 +241,21 @@ fly.request("/test",{hh:5},{
 
 ## API
 
-#### fly.get(url, data, options)
+#### `fly.get(url, data, options)`
 
-发起 get 请求，url请求地址，data为请求数据，在浏览器环境下类型可以是: **String|Json|Object|Array|Blob|ArrayBuffer|FormData**
+发起 get 请求，url请求地址，data为请求数据，在浏览器环境下类型可以是: 
+
+```shell
+String|Json|Object|Array|Blob|ArrayBuffer|FormData
+```
 
 options为请求配置项。
 
-#### fly.post(url, data, options)
+#### `fly.post(url, data, options)`
 
 发起post请求，参数含义同fly.get。
 
-#### fly.request(url, data, options)
+#### `fly.request(url, data, options)`
 
 发起请求，参数含义同上，在使用此API时需要指定options 的method：
 
@@ -286,13 +290,13 @@ var nFly=new Fly();
 
 ## Http engine
 
-Fly 引入了Http engine 的概念，所谓 Http engine，就是真正发起http请求的引擎，这在浏览器中一般都是XMLHttpRequest，而在 node 环境中，可以用任何能发起网络请求的库／模块实现，Fly 可以自由更换底层 http engine ，Fly 正是通过更换 engine 而实现同时支持 node 和 browser 。值得注意的是，http engine 不局限于node 和 browser 环境中，也可以是 android、ios、electron，正是由于这些，Fly 才有了一个非常强大的功能——**请求重定向**。基于请求重定向，我们可以实现一些非常有用的功能，比如**将内嵌到 APP 的所有 http 请求重定向到 Native ，然后在端上( android、ios )统一发起网络请求、进行 cookie 管理、证书校验**。详情请戳 [Fly Http Engine ](#/doc/flyio/engine)。
+Fly 引入了Http engine 的概念，所谓 Http engine，就是真正发起http请求的引擎，这在浏览器中一般都是`XMLHttpRequest`，而在 node 环境中，可以用任何能发起网络请求的库／模块实现，Fly 可以自由更换底层 http engine ，Fly 正是通过更换 engine 而实现同时支持 node 和 browser 。值得注意的是，http engine 不局限于node 和 browser 环境中，也可以是 android、ios、electron，正是由于这些，Fly 才有了一个非常强大的功能——**请求重定向**。基于请求重定向，我们可以实现一些非常有用的功能，比如**将内嵌到 APP 的所有 http 请求重定向到 Native ，然后在端上( android、ios )统一发起网络请求、进行 cookie 管理、证书校验**。详情请戳 [Fly Http Engine ](#/doc/flyio/engine)
 
 
 
 ## 全局Ajax拦截
 
-在浏览器中，可以通过用 Fly  engine 替换 XMLHttpRequest 的方式拦截**全局**的的 Ajax 请求，无论上层使用的是何种网络库。
+在浏览器中，可以通过用 Fly  engine 替换 `XMLHttpRequest` 的方式拦截**全局**的的 Ajax 请求，无论上层使用的是何种网络库。
 
 ## 体积
 

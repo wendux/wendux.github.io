@@ -18,14 +18,13 @@ function genMenus(dir='./static/doc'){
     if(fs.statSync(curPath).isDirectory()) {
       let mapFile=path.join(curPath,'map.json');
       if(fsExistsSync(mapFile)){
-        var config=JSON.parse(fs.readFileSync(mapFile,"utf-8"));
-        config.dir=file;
-        dirs.push(config);
+        var content=JSON.parse(fs.readFileSync(mapFile,"utf-8"));
+        fs.writeFileSync(path.join(curPath,"menus.json"),JSON.stringify(content));
       }
+
     }
   });
-  fs.writeFileSync('static/list.json',JSON.stringify(dirs));
-  console.log(dirs)
+  console.log("菜单生成完毕！")
 }
 
 genMenus()

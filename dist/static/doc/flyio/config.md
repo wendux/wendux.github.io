@@ -37,7 +37,7 @@ fly.request("/test",null,{ timeout:5000})
 
 ### 可选项
 
-除了通用项，您可以给配置选项中添加任何自定义字段。**自定义字段只在 fly 使用的是通过 EngineWrapper 定义的 http engine 时有才意义**，因为对自定义请求选项是否支持是取决底层 http engine 的。而在 Fly 中，除了浏览器内置的 XMLHttpRequest 以外，fly 还提供了node engine 和 native engine (需要 native 侧支持)，不同的engine 支持的选项也大都不同。**XMLHttpRequest 只支持通用项，不支持任何可选项。**
+除了通用项，您可以给配置选项中添加任何自定义字段。**自定义字段只在 fly 使用的是通过 EngineWrapper 定义的 http engine 时有才意义**，因为对自定义请求选项是否支持是取决底层 http engine 的。而在 Fly 中，除了浏览器内置的 `XMLHttpRequest` 以外，fly 还提供了node engine 和 native engine (需要 native 侧支持)，不同的engine 支持的选项也大都不同。**`XMLHttpRequest` 只支持通用项，不支持任何可选项。**
 
 #### **responseType**
 

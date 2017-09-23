@@ -4,11 +4,11 @@
 
 ## 原理
 
-无论是上层是通过何种方式发起的 Ajax 请求，最终都会回归到 XMLHttpRequest 。 所以，拦截的本质就是替换浏览器原生的 XMLHttpRequest 。具体就是，在替换之前保存先保存XMLHttpRequest，然后在请求过程中根据具体业务逻辑决定是否需要发起网络请求，如果需要，再创建真正的XMLHttpRequest实例。
+无论是上层是通过何种方式发起的 Ajax 请求，最终都会回归到 `XMLHttpRequest` 。 所以，拦截的本质就是替换浏览器原生的 `XMLHttpRequest` 。具体就是，在替换之前保存先保存 `XMLHttpRequest`，然后在请求过程中根据具体业务逻辑决定是否需要发起网络请求，如果需要，再创建真正的 `XMLHttpRequest` 实例。
 
 ## 自定义engine
 
-我们知道，在 Fly 中，XMLHttpRequest 就是一个 [http engine](#/doc/flyio/engine)。而 Fly 提供了快速生成 engine 的工具，所以我们可以很方便的实现 Ajax拦截。我们先看一个简单的输出每次网络请求 url 和 method的例子：
+我们知道，在 Fly 中，`XMLHttpRequest`  就是一个 [http engine](#/doc/flyio/engine)。而 Fly 提供了快速生成 engine 的工具，所以我们可以很方便的实现 Ajax拦截。我们先看一个简单的输出每次网络请求 url 和 method的例子：
 
 ### 实现一
 
@@ -47,7 +47,7 @@ axios.post("../package.json").then(log)
 > {data: {…}, status: 200, statusText: "OK", headers: {…}, config: {…}, …}
 ```
 
-控制台中输出了请求的 url 和 method， 第二行的结果对象是axios then打印出的。
+控制台中输出了请求的 url 和 method， 第二行的结果对象是axios `then`打印出的。
 
 上面的例子只是一个简单的示例，并不完善，如没有同步header、也没有超时处理，在生产环境下，你当然可以手动去完善这些细节，但是，仔细想想，是不是有更简单的方法？
 
@@ -81,11 +81,11 @@ axios.post("../package.json").then(log)
 
 ```
 
-因为 Fly支持切换engine, 我们可以直接先将 fly engine 切换为真正的 XMLHttpRequest ，然后再覆盖，这样fly中的网络请求都是通过真正的 XMLHttpRequest 发起的 (事实上， 浏览器环境下 fly 默认的 engine本就是 XMLHttpRequest，无需手动切换，此处为了清晰，故手动切换了一下)。fly 会根据request对象自动同步请求头。如果想阻止请求，直接在 adapter 中 return 即可。
+因为 Fly支持切换engine, 我们可以直接先将 fly engine 切换为真正的 `XMLHttpRequest` ，然后再覆盖，这样fly中的网络请求都是通过真正的 `XMLHttpRequest` 发起的 (事实上， 浏览器环境下 fly 默认的 engine本就是 `XMLHttpRequest`，无需手动切换，此处为了清晰，故手动切换了一下)。fly 会根据request对象自动同步请求头。如果想阻止请求，直接在 adapter 中 return 即可。
 
 
 
 ## 其它的拦截方法
 
-Github上的开源库 [Ajax-hook](https://github.com/wendux/Ajax-hook) 也可以拦截全局的的ajax请求，不同的是，它可以拦截ajax请求的每一步，每一个回调，不仅强大，而且也很轻量（1KB）。和上面通过 fly engine 拦截的方式相比 ，Ajax-hook的拦截粒度更细，但Ajax-hook由于使用了ES5的 getter、setter，所以不支持IE9以下的浏览器。
+Github上的开源库 [Ajax-hook](https://github.com/wendux/Ajax-hook) 也可以拦截全局的的ajax请求，不同的是，它可以拦截ajax请求的每一步，每一个回调，不仅强大，而且也很轻量（1KB）。和上面通过 fly engine 拦截的方式相比 ，Ajax-hook的拦截粒度更细，但Ajax-hook由于使用了ES5的 `getter`、`setter`，所以不支持IE9以下的浏览器。
 

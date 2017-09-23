@@ -34,7 +34,7 @@
       padding-top :30px;
     }
     h3 {
-      font-size: 20px;
+      font-size: 18px;
       padding : 10px 0;
     }
     h4 {
@@ -70,22 +70,26 @@
       position: relative;
       margin-bottom: 24px;
       border-radius: 3px;
-      background-color: #f6fb6f6;
+      background-color: #f6f6f6 !important;
       white-space: pre;
-    }
-    code {
       display: block;
-      padding: 12px 24px;
+      padding: 12px 20px;
+      overflow-x: auto;
+      code{
+        white-space: pre;
+        color : inherit;
+        font-weight :normal !important;
+        line-height: 1.8em;
+      }
+    }
+
+    code {
       font-family: "SFMono-Regular", Menlo, 'Roboto Mono', Monaco, courier, monospace;
-      font-size: 13px;
-      font-weight :normal !important;
       background-color: #f6f6f6 !important;
       -webkit-font-smoothing: initial;
-      line-height: 1.8em;
-      color : inherit;
-      margin: 10px 0;
-      white-space: pre;
-      overflow-x: auto;
+      padding: 0 2px;
+      /*font-weight normal !important;*/
+
     }
     code:after, code:before, kbd:after, kbd:before {
       content: "" !important;
@@ -102,6 +106,7 @@
       text-align: left;
       background: #eee;
       padding: 8px 12px;
+      white-space: nowrap;
 
     }
     td {
@@ -116,9 +121,12 @@
         padding: 8px 10px 8px 15px;
         font-size: 14px;
       }
-      code {
+      pre{
+        padding: 12px;
         font-size : 12px;
-        padding :12px;
+      }
+      code {
+
       }
     }
 

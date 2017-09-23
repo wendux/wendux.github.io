@@ -15,7 +15,8 @@ Object.assign(window,{
   bus:new Vue(),
   store:{
     title:"",
-    menus:[],
+    menus:{},
+    map:{}
   }
 })
 

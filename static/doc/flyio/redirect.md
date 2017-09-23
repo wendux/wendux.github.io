@@ -12,7 +12,7 @@
 
 ### Cookie同步
 
-混合APP种非常关键的一点就是 Native 和 h5 之间的 cookie 同步。因为 Native 和 h5 都可以发起网络请求，而两者所用的请求池并不是同一个（h5  ajax 请求是 webview 发起的），这就会导致 Native 和 h5 cookie 不能同步，如果不能统一管理请求，就会导致你要在不同的场景做大量的同步工作。更沮丧的是，在ios系统中WKWebview并没有提供 cookie 同步的接口，开发者通常是通过注入 javascript的方式间接实现，但是这种做法有个缺点，就是无法同步 httpOnly 属性的 cookie , 因为 javascript 无法操作具有httpOnly属性的cookie ( 这主要是因为现代浏览器为了防止xss攻击成功后确保用户cookie不会被恶意脚本窃取而添加的特性 )。
+混合APP种非常关键的一点就是 Native 和 h5 之间的 cookie 同步。因为 Native 和 h5 都可以发起网络请求，而两者所用的请求池并不是同一个（h5  ajax 请求是 webview 发起的），这就会导致 Native 和 h5 cookie 不能同步，如果不能统一管理请求，就会导致你要在不同的场景做大量的同步工作。更沮丧的是，在ios系统中WKWebview并没有提供 cookie 同步的接口，开发者通常是通过注入 javascript 的方式间接实现，但是这种做法有个缺点，就是无法同步 httpOnly 属性的 cookie , 因为 javascript 无法操作具有httpOnly属性的cookie ( 这主要是因为现代浏览器为了防止xss攻击成功后确保用户cookie不会被恶意脚本窃取而添加的特性 )。
 
 ### 接口安全
 

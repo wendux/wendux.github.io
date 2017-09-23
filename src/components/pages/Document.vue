@@ -7,12 +7,12 @@
       v-model="drawer"
       enable-resize-watcher
     >
-      <v-list>
+      <v-list dense >
         <v-list-tile
           ripple
-          v-for="(item, i) in items"
+          v-for="(item, i) in comMenus"
           :key="i"
-          @click.native="go(item)"
+          @click="go(item)"
         >
           <v-list-tile-action>
             <v-icon v-html="item.icon"></v-icon>
@@ -24,25 +24,30 @@
       </v-list>
 
       <!--文档列表菜单-->
-      <v-list>
-        <v-list-group value="true" v-if="store.menus">
+      <v-list dense >
+        <v-list-group
+                      v-if="store.menus"
+                      v-for="(dir, i) in store.menus.dirs"
+                      :key="i"
+                      :value="dir.active"
+        >
           <v-list-tile slot="item" ripple>
             <v-list-tile-action>
-              <v-icon>{{ store.menus.icon||"folder" }}</v-icon>
+              <v-icon>{{ dir.icon||"folder" }}</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>{{ store.menus.title }}</v-list-tile-title>
+              <v-list-tile-title>{{ dir.title }}</v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-icon>keyboard_arrow_down</v-icon>
             </v-list-tile-action>
           </v-list-tile>
 
-          <v-list-tile v-for="subItem in store.menus.list"
+          <v-list-tile v-for="subItem in dir.list"
                        :key="subItem.title"
                        ripple
                        :value="subItem.file==$route.params.name"
-                       @click.native="$router.push({path:`/doc/${path}/${subItem.file}`})">
+                       @click="$router.push({path:`/doc/${path}/${subItem.file}`})">
 
             <v-list-tile-content>
               <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
@@ -61,7 +66,7 @@
     <main>
       <v-container fluid>
         <v-slide-y-transition mode="out-in">
-          <router-view></router-view>
+          <router-view style=" min-height: calc(100vh - 210px);"></router-view>
         </v-slide-y-transition>
         <copy-right></copy-right>
       </v-container>
@@ -87,18 +92,17 @@
         path:""
       }
     },
+    beforeRouteUpdate(to,from,next){
+      this.load(to)
+      next()
+    },
     created(){
-      this.path=this.$route.params.path;
-      fly.get(`/static/doc/${this.path}/map.json`).then(d=>{
-        store.menus=d.data;
-        console.log(d.data.menus)
-        this.items=this.items.concat(d.data.menus);
-        setTimeout(()=>{
-          this.show=true;
-        },18);
-        store.title=store.menus&&store.menus.pageTitle||"文档中心";
-        document.getElementsByTagName('title')[0].innerText=store.title;
-      })
+      this.load(this.$route)
+    },
+    computed:{
+      comMenus(){
+        return this.items.concat(this.store.menus.menus||[]);
+      }
     },
     methods:{
       go(item){
@@ -107,6 +111,31 @@
         }else{
           this.$router.push({path:item.route})
         }
+      },
+      load(route){
+        this.path=route.params.path;
+        fly.get(`/static/doc/${this.path}/menus.json`).then(d=>{
+
+          var pre;
+          var map={};
+          d.data.dirs.forEach(e=>{
+            e.list.forEach(item=>{
+              if(pre){
+                pre.next=item;
+                item.pre=pre;
+              }
+              pre=map[item.file]=item;
+            })
+          })
+          store.menus=d.data;
+          store.map=map;
+
+          setTimeout(()=>{
+            this.show=true;
+          },18);
+          store.title=store.menus&&store.menus.pageTitle||"文档中心";
+          document.getElementsByTagName('title')[0].innerText=store.title;
+        })
       }
     }
   }

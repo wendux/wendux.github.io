@@ -1,6 +1,6 @@
 # Native实现Http Engine
 
-本文将以Android为例，从头来实现一个Http Engine。
+本文将以 Android 为例，从头来实现一个Http Engine。
 
 > 我们使用的DSBridge为H5和Native的通信桥梁（ Javascript Bridge ），关于DSBridge介绍请参考 
 >
@@ -25,7 +25,7 @@
 
 ### 第二步：H5侧提供adapter
 
-我们使用的是DSBridge, 可以直接调用Native中注册的 “onAjaxRequest”，下面是adapter/dsbridge.js的部分代码：
+我们使用的是DSBridge, 可以直接调用Native中注册的 `onAjaxRequest`，下面是adapter/dsbridge.js的部分代码：
 
 ```javascript
 adapter = function (request, responseCallBack) {
@@ -35,7 +35,7 @@ adapter = function (request, responseCallBack) {
 }
 ```
 
-可以看到 adapter 直接通过dsBridge的call方法将请求对象传给了Native，Native再完成真正的http请求后会回调"onResponse"，responseData即为响应数据。
+可以看到 adapter 直接通过dsBridge的call方法将请求对象传给了Native，Native再完成真正的http请求后会回调 `responseCallBack`，responseData 即为响应数据。
 
 ### 第三步：更换新engine
 
@@ -151,7 +151,7 @@ public void onAjaxRequest(JSONObject requestData, final CompletionHandler handle
 上面代码为演示代码，在生产环境有以下几点需要注意
 
 1. OkHttpClient 应该共享实例，而不是每次请求都创建实例
-2. Cookie应进行统一的管理或持久化，可以使用okhttp的CookieJar。
+2. Cookie应进行统一的管理或持久化，可以使用okhttp的`CookieJar`。
 3. Https请求时应添加证书校验。
 
 ### Stream
