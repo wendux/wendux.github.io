@@ -80,6 +80,7 @@
         color : inherit;
         font-weight :normal !important;
         line-height: 1.8em;
+        font-size : 13px;
       }
     }
 
@@ -123,10 +124,9 @@
       }
       pre{
         padding: 12px;
-        font-size : 12px;
-      }
-      code {
-
+        code{
+          font-size : 12px;
+        }
       }
     }
 

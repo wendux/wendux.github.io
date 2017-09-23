@@ -97,7 +97,7 @@ fly.$http('http://google.com/doodle.png')
 request.post('http://service.com/upload', {form:{key:'value'}})
 ```
 
-详细的文档请移步 [Github request](request.post('http://service.com/upload', {form:{key:'value'}})) 。
+详细的文档请移步 [Github request](https://github.com/request/request#requestoptions-callback) 。
 
 
 ## 请求配置
