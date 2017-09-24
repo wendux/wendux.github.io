@@ -1,4 +1,12 @@
-# Fly.js
+
+
+![fly.js](./static/doc/flyio/fly.png)
+<div style="text-align:center; margin-bottom:40px;">
+<div style="overflow:hidden;    display: inline-block;"><div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>  <div style="float:left; margin-left:20px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div>
+</div>
+</div>
+
+# 简介
 
 Fly.js 是一个基于 promise 的，轻量且强大的Javascript http 网络库，它有如下特点：
 
@@ -118,7 +126,7 @@ fly.request("/test",{hh:5},{
 
 ```javascript
  var formData = new FormData();
- var log=console.log 
+ var log=console.log
  formData.append('username', 'Chris');
  fly.post("../package.json",formData).then(log).catch(log)
 ```
@@ -243,7 +251,7 @@ fly.request("/test",{hh:5},{
 
 #### `fly.get(url, data, options)`
 
-发起 get 请求，url请求地址，data为请求数据，在浏览器环境下类型可以是: 
+发起 get 请求，url请求地址，data为请求数据，在浏览器环境下类型可以是:
 
 ```shell
 String|Json|Object|Array|Blob|ArrayBuffer|FormData
@@ -279,7 +287,7 @@ request 适合在 [RESTful API](http://en.wikipedia.org/wiki/Representational_st
 
 ```javascript
 //npm、node环境下
-var  Fly=require("fio/dist/fly") //注意！此时引入的是 "fio/dist/fly" 
+var  Fly=require("fio/dist/fly") //注意！此时引入的是 "fio/dist/fly"
 var nFly=new Fly();
 
 //CDN引入时直接new
@@ -302,9 +310,9 @@ Fly 引入了Http engine 的概念，所谓 Http engine，就是真正发起http
 
 Fly 非常轻量，min 只有 4.6K 左右，GZIP 压缩后不到 2K, 体积是 axios 的四分之一。
 
-## Finally 
+## Finally
 
-如果感觉 Fly 对您有用，欢迎 star 。 
+如果感觉 Fly 对您有用，欢迎 star 。
 
 
 

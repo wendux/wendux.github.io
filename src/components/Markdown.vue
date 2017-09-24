@@ -13,6 +13,11 @@
       margin-left: -3px;
       line-height :1.6em;
     }
+    img{
+      max-width :100%;
+      display: block;
+      margin: 0 auto;
+    }
 
     hr {
       border: 0;
