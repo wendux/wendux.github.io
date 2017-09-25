@@ -2,11 +2,19 @@
 
 ![fly.js](./static/doc/flyio/fly.png)
 <div style="text-align:center; margin-bottom:40px;">
-<div style="overflow:hidden;    display: inline-block;"><div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>  <div style="float:left; margin-left:20px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div>
+<div style="overflow:hidden;    display: inline-block;"><div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>  <div style="float:left; margin-left:10px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div>
 </div>
 </div>
 
-# 简介
+
+
+| ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| ✔                                        | ✔                                        | ✔                                        | ✔                                        | ✔                                        | > 8                                      |
+
+
+
+## 简介
 
 Fly.js 是一个基于 promise 的，轻量且强大的Javascript http 网络库，它有如下特点：
 
@@ -20,9 +28,9 @@ Fly.js 是一个基于 promise 的，轻量且强大的Javascript http 网络库
 8. **H5页面内嵌到原生 APP 中，支持将 http 请求转发到 Native，支持直接请求图片**。
 9. **高度可定制、可拆卸、可拼装。**
 
-## 官网
+## 本站
 
-详细的文档请移步：[Flyio官网文档](https://wendux.github.io/dist/#/doc/flyio/readme) 。 官网http请求使用的正是fly，为了方便大家验证fly功能特性，官网对fly进行了全局引入，您可以在官网页面打开控制台直接验证。
+ 本站http请求使用的正是fly，为了方便大家验证fly功能特性，官网对fly进行了全局引入，您可以打开控制台直接验证。
 
 ## 安装
 
