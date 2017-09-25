@@ -101,9 +101,7 @@
       content: "" !important;
     }
     table {
-      margin-bottom: 10px;
-      width: 100%;
-      display:block;
+      margin: 10px auto;
       overflow :auto;
       border-collapse: collapse;
     }
@@ -113,7 +111,6 @@
       background: #eee;
       padding: 8px 12px;
       white-space: nowrap;
-
     }
     td {
       border: #ccc 1px solid;
@@ -126,6 +123,9 @@
       blockquote {
         padding: 8px 10px 8px 15px;
         font-size: 14px;
+      }
+      table{
+        display:block;
       }
       pre{
         padding: 12px;
