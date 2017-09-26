@@ -130,6 +130,21 @@ fly.request("/test",{hh:5},{
 .catch((e) => console.log("error", e))
 ```
 
+
+
+### 发送`URLSearchParams`
+
+```javascript
+const params = new URLSearchParams();
+params.append('a', 1);
+fly.post("",params)
+.then(d=>{ console.log("request result:",d)})
+```
+
+注：Node环境不存在URLSearchParams。各个浏览器对URLSearchParams的支持程度也不同，使用时务必注意
+
+
+
 ### 发送 `FormData`
 
 ```javascript
@@ -293,7 +308,7 @@ request 适合在 [RESTful API](http://en.wikipedia.org/wiki/Representational_st
 
 #### `fly.all([])`
 
-发起多个并发请求，参数是一个promise 数组。
+发起多个并发请求，参数是一个promise 数组；当所有请求都成功后才会调用`then`，只要有一个失败，就会调`catch`。
 
 
 
