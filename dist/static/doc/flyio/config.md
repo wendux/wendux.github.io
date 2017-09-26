@@ -30,8 +30,7 @@ fly.request("/test",null,{ timeout:5000})
   method:"",//请求方法， GET 、POST ...
   headers:{},//请求头
   url:"",//请求地址
-  timeout:"",//超时时间
-  data:""//请求数据，GET请求时为null
+  timeout:""//超时时间
 }
 ```
 
@@ -51,7 +50,7 @@ Fly Node engine 使用的是开源的 [request](https://github.com/request/reque
 
 注意：
 
-1. 因为通用项data会覆盖body字段，所以请不要手动设置body。
+1. 所以请不要手动设置body选项，fly会将用户参数自动设置到body中。
 2. Node engine是支持http代理的，如果要使用代理，可以参考request代理相关选项。
 
 #### 自定义engine时使用可选项

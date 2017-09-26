@@ -23,7 +23,7 @@
    //发起真正的请求
    var xhr=new realXMLHttpRequest()
    xhr.open(request.method,request.url);
-   xhr.send(request.data);
+   xhr.send(request.body);
    var callback=function () {
      responseCallback({
        statusCode:xhr.status,

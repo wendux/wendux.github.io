@@ -46,7 +46,7 @@ function (request, responseCallBack)
   headers:{},//请求头
   url:"",//请求地址
   timeout:"",//超时时间
-  data:""//请求数据，GET请求时为null
+  body  //请求数据，GET请求时为null,类型不定，可能是FromData、字符串。
 }
 ```
 
@@ -71,7 +71,7 @@ function (request, responseCallBack)
 
 对于 request对象， 用户在发起的请求配置 options 中的其它字段也会 merge 到 request 对象中，这样就可以在adapter 中获取到，这在自定义 adapte r时非常有用。
 
-对于 response 对象，可以在 adapter  中给其添加任何自定义属性（但不能是添加 key 为 “data” 的字段, 因为在fly中 data 永远代表请求的最终结果，EngineWrapper 中会自动设置），然后上层在 then 回调中可以取出。
+对于 response 对象，可以在 adapter  中给其添加任何自定义属性，然后上层在 then 回调中可以取出。
 
 ### 一个简单的例子
 
