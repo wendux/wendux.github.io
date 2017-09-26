@@ -130,5 +130,4 @@ fly.get("xxx.com")...
 
 Fly 将 http 请求重定向到 Native ，Native 是需要完成真正的 http 请求。具体实现由端上根据使用的网络框架自定。Fly官方提供了Android端的实现示例，可供开发者参考，详情请参考 [Native 实现 Http Engine](#/doc/flyio/native) 。
 
-### 
 

@@ -18,19 +18,19 @@
 
 Fly.js 是一个基于 promise 的，轻量且强大的Javascript http 网络库，它有如下特点：
 
-1. 支持 Promise API。
+1. 提供统一的 Promise API。
 2. 支持浏览器环境，**轻量且非常轻量** 。
-3. 支持 Node，node下支持文件下载／上传、http代理等增强功能。
+3. 支持 Node 环境。
 4. 支持请求／响应拦截器。
 5. 自动转换 JSON 数据。
-6. **支持切换底层 http engine**。
+6. **支持切换底层 Http Engine，可轻松适配各种运行环境**。
 7. **浏览器端支持全局Ajax拦截 。**
-8. **H5页面内嵌到原生 APP 中，支持将 http 请求转发到 Native，支持直接请求图片**。
+8. **H5页面内嵌到原生 APP 中时，支持将 http 请求转发到 Native。支持直接请求图片**。
 9. **高度可定制、可拆卸、可拼装。**
 
 ## 本站
 
- 本站http请求使用的正是fly，为了方便大家验证fly功能特性，官网对fly进行了全局引入，您可以打开控制台直接验证。
+本站 http请求库使用的正是 fly，为了方便大家验证 fly 的功能特性，本站对 fly 进行了全局引入，您可以打开控制台直接验证其功能。
 
 ## 安装
 
@@ -190,9 +190,15 @@ fly.interceptors.response.use(null,null)
 
 
 
+## Node
+
+无论是在浏览器环境，还是在 Node 环境，Fly在上层提供了统一的 Promise API。这意味着无论您是 web 开发还是 node 开发，您都可以以相同的调用方式来发起http请求。不过，由于node和浏览器环境本身的差异，在Node环境下，Fly除了支持基本的API之外，还提供了一些增强的API，这些 API 主要涉及文件下载、多文件上传、http代理等众多强大的功能，详情请参考 [Node 下增强的API ](#/doc/flyio/node) 
+
+
+
 ## 错误处理
 
-请求失败之后，`catch` 捕获到的 err 为 Error 的一个实例，有两个字段
+请求失败之后，`catch` 捕获到的 err 为 Error 的一个实例，err有两个字段:
 
 ```javascript
 {
@@ -200,7 +206,6 @@ fly.interceptors.response.use(null,null)
   status:404 //如果服务器可通，则为http请求状态码。网络异常时为0，网络超时为1
 }
 ```
-
 
 | 错误码   | 含义                         |
 | ----- | -------------------------- |
@@ -286,6 +291,10 @@ fly.request("/user/register", {name:"doris"}, {method:"PUT"})
 
 request 适合在 [RESTful API](http://en.wikipedia.org/wiki/Representational_state_transfer) 的场景下使用。
 
+#### `fly.all([])`
+
+发起多个并发请求，参数是一个promise 数组。
+
 
 
 ## 创建Fly实例
@@ -303,9 +312,9 @@ var nFly=new Fly();
 
 
 
-## Http engine
+## Http Engine
 
-Fly 引入了Http engine 的概念，所谓 Http engine，就是真正发起http请求的引擎，这在浏览器中一般都是`XMLHttpRequest`，而在 node 环境中，可以用任何能发起网络请求的库／模块实现，Fly 可以自由更换底层 http engine ，Fly 正是通过更换 engine 而实现同时支持 node 和 browser 。值得注意的是，http engine 不局限于node 和 browser 环境中，也可以是 android、ios、electron，正是由于这些，Fly 才有了一个非常强大的功能——**请求重定向**。基于请求重定向，我们可以实现一些非常有用的功能，比如**将内嵌到 APP 的所有 http 请求重定向到 Native ，然后在端上( android、ios )统一发起网络请求、进行 cookie 管理、证书校验**。详情请戳 [Fly Http Engine ](#/doc/flyio/engine)
+Fly 引入了Http Engine 的概念，所谓 Http Engine，就是真正发起 http 请求的引擎，这在浏览器中一般都是`XMLHttpRequest`，而在 Node 环境中，可以用任何能发起网络请求的库／模块实现。Fly 可以自由更换底层 Http Engine 。事实上，Fly 正是通过更换 Http Engine 而实现同时支持浏览器环境和Node环境的 。不过，Http Engine 并不局限于Node 和 浏览器环境，也可以是 Android、ios、electron等，正是由于这些，Fly 才有了一个非常独特而强大的功能——**请求重定向**。基于请求重定向，我们可以实现一些非常有用的功能，比如**将内嵌到 APP 的所有 http 请求重定向到 Native ，然后在端上( Android、ios )统一发起网络请求、进行 cookie 管理、证书校验**等，详情请戳 [Fly Http Engine ](#/doc/flyio/engine)
 
 
 
@@ -313,9 +322,12 @@ Fly 引入了Http engine 的概念，所谓 Http engine，就是真正发起http
 
 在浏览器中，可以通过用 Fly  engine 替换 `XMLHttpRequest` 的方式拦截**全局**的的 Ajax 请求，无论上层使用的是何种网络库。
 
+
+
 ## 体积
 
-Fly 非常轻量，min 只有 4.6K 左右，GZIP 压缩后不到 2K, 体积是 axios 的四分之一。
+在浏览器环境下，一个库的大小是非常重要的。这方面 Fly 做的很好，它在保持强大的功能的同时，将自己的身材控制到了最好。min 只有 4.6K 左右，GZIP 压缩后不到 2K，体积是 axios 的四分之一。
+
 
 ## Finally
 

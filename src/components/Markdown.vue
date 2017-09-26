@@ -3,13 +3,14 @@
 </template>
 <style lang="stylus">
   @import "../stylus/main.styl"
+  $codeBack=#f3f3f3;
   .md {
     font-size: 15px;
-    color: rgb(52, 73, 94);
-    line-height :1.6em;
+    color: #333;
+    line-height :1.7em;
     h1, h2, h3, h4 {
       font-weight: bold;
-      color: #2c3e50;
+      color: #333;
       margin-left: -3px;
       line-height :1.6em;
     }
@@ -75,14 +76,16 @@
       position: relative;
       margin-bottom: 24px;
       border-radius: 3px;
-      background-color: #f6f6f6 !important;
+      background-color: $codeBack !important;
       white-space: pre;
       display: block;
       padding: 12px 20px;
+      border:#eee 1px solid;
+      line-height :1.6em;
       overflow-x: auto;
       code{
         white-space: pre;
-        color : inherit;
+        color: rgb(52, 73, 94);
         font-weight :normal !important;
         line-height: 1.8em;
         font-size : 13px;
@@ -91,7 +94,7 @@
 
     code {
       font-family: "SFMono-Regular", Menlo, 'Roboto Mono', Monaco, courier, monospace;
-      background-color: #f6f6f6 !important;
+      background-color: $codeBack !important;
       -webkit-font-smoothing: initial;
       padding: 0 2px;
       /*font-weight normal !important;*/

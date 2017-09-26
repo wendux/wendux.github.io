@@ -27,3 +27,5 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+console.log("您可以直接输入fly验证其功能")
