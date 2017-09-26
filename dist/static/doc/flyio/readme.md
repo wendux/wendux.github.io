@@ -1,6 +1,7 @@
 
 
 ![fly.js](./static/doc/flyio/fly.png)
+
 <div style="text-align:center; margin-bottom:40px;">
 <div style="overflow:hidden;    display: inline-block;"><div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>  <div style="float:left; margin-left:10px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div>
 </div>
