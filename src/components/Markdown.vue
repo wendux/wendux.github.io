@@ -80,7 +80,6 @@
       white-space: pre;
       display: block;
       padding: 12px 20px;
-      border:#eee 1px solid;
       line-height :1.6em;
       overflow-x: auto;
       code{

@@ -16,7 +16,7 @@
 
 ## 简介
 
-Fly.js 是一个基于 promise 的，轻量且强大的Javascript http 网络库，它有如下特点：
+Fly.js 是一个基于 promise 的，轻量且强大的 Javascript http 网络库，它有如下特点：
 
 1. 提供统一的 Promise API。
 2. 支持浏览器环境，**轻量且非常轻量** 。
@@ -28,9 +28,19 @@ Fly.js 是一个基于 promise 的，轻量且强大的Javascript http 网络库
 8. **H5页面内嵌到原生 APP 中时，支持将 http 请求转发到 Native。支持直接请求图片**。
 9. **高度可定制、可拆卸、可拼装。**
 
+
+
+## 定位与目标
+
+Fly 的定位是成为 Javascript http请求的终极解决方案。也就是说，在任何能够执行 Javascript 的环境，只要具有访问网络的能力，Fly都能运行在其上，提供统一的API。
+
+
+
 ## 本站
 
 本站 http请求库使用的正是 fly，为了方便大家验证 fly 的功能特性，本站对 fly 进行了全局引入，您可以打开控制台直接验证其功能。
+
+
 
 ## 安装
 
@@ -51,6 +61,8 @@ npm install flyio
 ```http
 https://unpkg.com/flyio/dist/fly.umd.min.js
 ```
+
+
 
 ## 例子
 

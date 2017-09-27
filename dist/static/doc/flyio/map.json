@@ -37,6 +37,10 @@
         {
           "title": "全局Ajax拦截",
           "file": "hook"
+        },
+        {
+          "title": "与axios、Fetch的对比",
+          "file": "compare"
         }
       ]
     }

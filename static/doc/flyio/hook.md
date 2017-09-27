@@ -13,8 +13,7 @@
 ### 实现一
 
 ```javascript
- var EngineWrapper = require("flyio/dist/engine-wrapper") 
- var log=console.log;
+ var EngineWrapper = require("flyio/dist/engine-wrapper")
  //保存XMLHttpRequest
  var realXMLHttpRequest=XMLHttpRequest;
  var engine= EngineWrapper(function (request,responseCallback) {
