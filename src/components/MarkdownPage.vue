@@ -78,9 +78,9 @@
             },100)
           }
         }
+        document.body.scrollTop = 0
         fly.get(`/static/doc/${this.path}/${this.name}.md`).then(d => {
           this.data = d.data;
-          document.body.scrollTop = 0
           wait();
 
         }).catch(e => {
