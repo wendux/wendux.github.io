@@ -14,7 +14,7 @@ Fly 的请求配置为**实例级配置**和**单次请求配置**。两者可�
 //实例级配置
 fly.config.timeout=5000;
 //单次请求配置
-fly.request("/test",null,{ timeout:5000}) 
+fly.request("/test",null,{ timeout:5000})
 ```
 
 
@@ -29,7 +29,7 @@ fly.request("/test",null,{ timeout:5000})
 {
   method:"",//请求方法， GET 、POST ...
   headers:{},//请求头
-  url:"",//请求地址
+  baseURL:"",//请求基地址
   timeout:""//超时时间
 }
 ```

@@ -28,4 +28,9 @@ new Vue({
   components: { App }
 })
 
+console.log("%c***********************\n" +
+  "本站使用fly作为网络请求库\n" +
+  "github: https://github.com/wendux/fly\n" +
+  "author: wendu, 欢迎 star! \n"+
+  "***********************",'color: teal')
 console.log("您可以直接输入fly验证其功能")
