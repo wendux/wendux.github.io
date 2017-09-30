@@ -10,6 +10,7 @@
       "icon":"",
       "list":[
         {"title":"doris简介","file":"intro"},
+        {"title":"使用","file":"start"},
         {"title":"数据模版定义","file":"data-mock"},
         {"title":"数据占位符","file":"placeholder"},
         {"title":"接口验证","file":"validate"}
