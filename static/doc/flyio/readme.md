@@ -12,7 +12,7 @@
 
 <style>
 
- table{margin: 20px auto !important;}
+ table:first-of-type{margin: 20px auto !important;}
 
 </style>
 
