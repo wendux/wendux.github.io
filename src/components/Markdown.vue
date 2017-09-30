@@ -103,7 +103,7 @@
       content: "" !important;
     }
     table {
-      margin: 10px auto;
+      margin: 20px 0;
       overflow :auto;
       border-collapse: collapse;
     }
