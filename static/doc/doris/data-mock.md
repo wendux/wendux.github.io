@@ -4,7 +4,7 @@ Doris 是通过数据模版生成数据，模版为 jsonx 格式（doris 扩展�
 
 ## JSONX
 
-jsonx 是 doris 对 json 扩展后的语法格式，和标准的 json 语法同的有两点：
+jsonx 是 doris 对 json格式的扩展，和标准的 json 语法有两点不同：
 
 1. 支持注释
 2. 支持 mock 语法
