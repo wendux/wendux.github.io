@@ -20,6 +20,7 @@
     -webkit-font-smoothing: antialiased;
     word-break: break-word;
     box-sizing: border-box;
+    overflow-y: scroll;
   }
   @media screen and (max-width: 600px) {
     .navigation-drawer {
