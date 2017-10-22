@@ -16,7 +16,7 @@
           </div>
         </div>
     </v-flex>
-    <v-flex md10 xs12 v-if="loading" style="text-align: center">
+    <v-flex md10 xs12 v-if="loading" style="text-align: center; margin-top: 30px">
       <v-progress-circular indeterminate v-bind:size="30" class="primary--text"></v-progress-circular>
     </v-flex>
   </v-layout>
@@ -78,7 +78,10 @@
             },100)
           }
         }
-        document.body.scrollTop = 0
+       // alert(document.documentElement.scrollTop)
+       // alert(document.body.scrollTop)
+        document.body.scrollTop=0
+        document.documentElement.scrollTop=0
         fly.get(`/static/doc/${this.path}/${this.name}.md`).then(d => {
           this.data = d.data;
           wait();
