@@ -85,7 +85,7 @@
         clipped: false,
         drawer: false,
         items: [
-          { icon: 'home', title: '主页' }
+          { icon: 'home', title: '主页' , route:"https://github.com/wendux"}
         ],
         store: store,
         show:false,
