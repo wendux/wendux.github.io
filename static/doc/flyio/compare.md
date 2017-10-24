@@ -15,19 +15,19 @@
 
 ### 浏览器环境
 
-浏览器环境下两者功能不分伯仲，最大的不同是大小，fly.min.js只有4K左右，大概是axios.min.js要12K多。Fly更轻量。
+浏览器环境下两者功能不分伯仲，最大的不同是大小，fly.min.js只有4K左右，而axios.min.js 12K左右。Fly更轻量，集成成本更低。
 
 ### Node环境
 
-Node下Fly的功能要明显强于axios，Fly在node下不仅提供了文件下载、上传的API，而且还可以通过 `fly.$http` 直接调用 [request 库 ](https://github.com/request/request) 的所有功能。
+Node下 Fly 的功能要明显强于axios，Fly在node下不仅提供了文件下载、上传的API，而且还可以通过 `fly.$http` 直接调用 [request 库 ](https://github.com/request/request) 的所有功能，详情请参照[Node下增强的API](#/doc/flyio/node) 。
 
 ### 请求转发
 
-Fly最大的特点就是在混合APP中支持请求转发，而axios不支持。
+Fly最大的特点就是在混合APP中支持请求转发，而axios不支持，关于请求转发的详细内容请参照[请求重定向](#/doc/flyio/redirect) 。
 
 ### Http Engine
 
-Fly中提出了Http Engine的概念，Fly可以通过更换Http Engine的方式实现很多有趣的功能，比如全局Ajax拦截。
+Fly中提出了Http Engine的概念，Fly可以通过更换Http Engine的方式实现很多有趣的功能，比如全局Ajax拦截，详情请参考 [全局ajax拦截](#/doc/flyio/hook) 。
 
 ### 设计思想
 
