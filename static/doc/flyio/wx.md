@@ -5,7 +5,7 @@
 
 ### 下载
 
-您需要在 https://unpkg.com/flyio/dist/ 或 https://github.com/wendux/fly/tree/master/dist下载wx.js(未压缩) 或 wx.umd.min.js（已压缩，12k）任意一个, 然后将其拷贝到您的工程目录下。
+您需要在 https://unpkg.com/flyio/dist/ 或 https://github.com/wendux/fly/tree/master/dist 下载 wx.js(未压缩) 或 wx.umd.min.js（已压缩，12k）任意一个, 然后将其拷贝到您的工程目录下。
 
 ### 使用
 
