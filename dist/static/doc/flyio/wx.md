@@ -16,7 +16,7 @@ Page({
   bindViewTap: function() {
     //调用
     fly.get("http://10.10.180.81/doris/1/1.0.0/user/login",{xx:6}).then((d)=>{
-      console.log(d)
+      console.log(d.data)
     }).catch(err=>{
       console.log(err.status,err.message)
     })

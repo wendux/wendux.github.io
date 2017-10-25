@@ -39,6 +39,10 @@
           "file": "hook"
         },
         {
+          "title": "微信小程序中使用",
+          "file": "wx"
+        },
+        {
           "title": "与axios、Fetch的对比",
           "file": "compare"
         }
