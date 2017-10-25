@@ -1,11 +1,13 @@
 # 支持微信小程序
 
-官方支持小程序了, 从此你可以在微信小程序中愉快的使用fly了。
+微信小程序的 javascript 运行环境和浏览器不同，页面的脚本逻辑是在JsCore中运行，JsCore是一个没有窗口对象的环境，所以不能在脚本中使用window，也无法在脚本中操作组件，JsCore中也没有 XmlhttpRequest对象，所以jquery 、zepto、axios这些在小程序中都不能用，而此时，正是 fly 大显身手的时候。
 
-> 您需要下载wx.js(未压缩) 或 wx.umd.min.js（压缩）, 然后将其拷贝到您的工程目录下
-> 下地址下载：https://unpkg.com/flyio/dist/  或 https://github.com/wendux/fly/tree/master/dist。
 
-**使用**
+### 下载
+
+您需要在 https://unpkg.com/flyio/dist/ 或 https://github.com/wendux/fly/tree/master/dist下载wx.js(未压缩) 或 wx.umd.min.js（已压缩，12k）任意一个, 然后将其拷贝到您的工程目录下。
+
+### 使用
 
 ```javascript
 var Fly=require("../lib/wx.js") //wx.js为您下载的源码文件
