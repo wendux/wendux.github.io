@@ -11,7 +11,7 @@
 
 ```javascript
 var Fly=require("../lib/wx.js") //wx.js为您下载的源码文件
-var fly=new Fly();创建fly实例
+var fly=new Fly(); //创建fly实例
 ...
 Page({
   //事件处理函数
