@@ -49,6 +49,10 @@
         {
           "title": "工程目录结构",
           "file": "files"
+        },
+        {
+          "title": "FAQ",
+          "file": "faq"
         }
       ]
     }
