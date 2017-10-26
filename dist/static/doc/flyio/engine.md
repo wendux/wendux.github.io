@@ -15,8 +15,8 @@ fly.engine=xx  //任何实现了engine接口的对象
 上面代码示意了 fly 如何切换 engine，那么如何来提供自定义的 engine, 本质上来讲，它就是一个和`XMLHttpRequest` 有相同接口、属性、行为的对象。这很糟糕，因为这必须得了解 `XMLHttpRequest` 的各个细节，为了简化 engine 的实现，Fly 提供了一个 engine-wrapper 模块，它是一个 engine 的骨架，开发者只需要实现一个适配器（adapter）便可方便的自动生成一个 engine。下面我们看看Fly内置的 node engine 的大概实现：
 
 ```javascript
-var  Fly=require("../dist/fly")
-var EngineWrapper = require("../dist/engine-wrapper")
+var Fly = require("../../dist/npm/fly")
+var EngineWrapper = require("../../dist/npm/engine-wrapper")
 //引入fly实现的node adapter
 var adapter = require("./adapter/node")
 //通过包装node adapter生成一个engine
@@ -101,7 +101,7 @@ fly.get("../package.json").then(d=>{
 
 ## 远程Http Engine
 
-我们说过，在浏览器环境中，fly 使用的默认的 engine 就是 `XMLHttpRequest`。 如果能在 Native 上实现一个engine，然后供浏览器中的 fly 使用，那么也就会将原本应该在浏览器中发起的请求重定向到了 Native 上。而这个在 Native 上实现的 engine，我们称其为为远程 engine，这是因为调用者和执行者并不在同一个环境。我们看看在fly中如何使用远程 engine。在介绍这个之前，我们先来了解一下什么是 **Javascript Bridge** 。 
+我们说过，在浏览器环境中，fly 使用的默认的 engine 就是 `XMLHttpRequest`。 如果能在 Native 上实现一个engine，然后供浏览器中的 fly 使用，那么也就会将原本应该在浏览器中发起的请求重定向到了 Native 上。而这个在 Native 上实现的 engine，我们称其为为远程 engine，这是因为调用者和执行者并不在同一个环境。我们看看在fly中如何使用远程 engine。在介绍这个之前，我们先来了解一下什么是 **Javascript Bridge** 。
 
 > Javascript Bridge 是指web应用中Javascript与Native之间接口互调，数据传输的一个桥梁。现在github中有一些成熟易用的移动端跨平台实现如: [dsBridge](https://github.com/wendux/DSBridge-Android) 、 [WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge) 。
 
@@ -114,9 +114,9 @@ fly.get("../package.json").then(d=>{
 [dsBridge](https://github.com/wendux/DSBridge-Android)  是一个优秀的跨平台的 Javascript Bridge ，最大的特点是不仅支持**异步调用**，也支持**异步调用**和进度**连续调用**。如果你的 App 使用的是DSBridge， 那么你可以非常方便的使用fly。
 
 ```javascript
-var adapter = require("flyio/dist/adapter/dsbridge")
-var EngineWrapper = require("flyio/dist/engine-wrapper")
-var Fly = require("flyio/dist/fly")
+var adapter = require("flyio/dist/npm/adapter/dsbridge")
+var EngineWrapper = require("flyio/dist/npm/engine-wrapper")
+var Fly = require("flyio/dist/npm/fly")
 
 var dsEngine = EngineWrapper(adapter)
 var fly = new Fly(engine);

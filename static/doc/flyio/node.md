@@ -99,6 +99,17 @@ request.post('http://service.com/upload', {form:{key:'value'}})
 
 详细的文档请移步 [Github request](https://github.com/request/request#requestoptions-callback) 。
 
+## 创建新实例
+
+Node下创建新实例时，要引用 `src/node/index.js`:
+
+```
+var Fly= require("./src/node")
+var newFly=new Fly;
+```
+
+
+
 
 ## 请求配置
 

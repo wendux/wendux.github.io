@@ -1,5 +1,9 @@
 var fs=require("fs")
 var path = require('path')
+require('shelljs/global')
+var config = require('../config')
+var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
+cp('-rf', 'static/.', assetsPath)
 
 function fsExistsSync(path) {
   try{

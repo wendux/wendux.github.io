@@ -4,8 +4,9 @@
 
 
 ### 下载
-
-您需要在 https://unpkg.com/flyio/dist/ 或 https://github.com/wendux/fly/tree/master/dist 下载 wx.js(未压缩) 或 wx.umd.min.js（已压缩，12k）任意一个, 然后将其拷贝到您的工程目录下。
+https://github.com/wendux/fly/tree/master/dist/npm/wx.js 
+https://github.com/wendux/fly/tree/master/dist/umd/wx.umd.min.js 
+下载任意一个, 然后将其拷贝到您的工程目录下。
 
 ### 使用
 
@@ -34,9 +35,9 @@ Fly对小程序的支持实际上是通过自定义 http engine的方式，我�
 
 ```javascript
 //微信小程序入口
-var  Fly=require("../dist/fly")
-var EngineWrapper = require("../dist/engine-wrapper")
-var adapter = require("../dist/adapter/wx") //微信小程序adapter
+var  Fly=require("./fly")
+var EngineWrapper = require("./engine-wrapper")
+var adapter = require("./adapter/wx") //微信小程序adapter
 var wxEngine = EngineWrapper(adapter)
 module.exports=function (engine) {
     return new Fly(engine||wxEngine);

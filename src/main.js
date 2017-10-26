@@ -5,7 +5,7 @@ import Vuetify from 'vuetify'
 import './stylus/main.styl'
 import App from './App'
 import router from './router'
-var Fly=require("flyio/dist/fly")
+var Fly=require("flyio/dist/npm/fly")
 Vue.use(Vuetify)
 Vue.config.productionTip = false
 Object.assign(window,{

@@ -45,6 +45,10 @@
         {
           "title": "与axios、Fetch的对比",
           "file": "compare"
+        },
+        {
+          "title": "工程目录结构",
+          "file": "files"
         }
       ]
     }

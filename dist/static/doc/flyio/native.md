@@ -42,8 +42,8 @@ adapter = function (request, responseCallBack) {
 最后就是更换新的engine:
 
 ```javascript
-var adapter = require("flyio/dist/adapter/dsbridge")
-var EngineWrapper = require("flyio/dist/engine-wrapper")
+var adapter = require("flyio/dist/npm/adapter/dsbridge")
+var EngineWrapper = require("flyio/dist/npm/engine-wrapper")
 var dsEngine = EngineWrapper(adapter)
 var fly = new Fly(dsEngine);
 ```
