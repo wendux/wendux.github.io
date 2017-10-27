@@ -2,7 +2,7 @@
   "pageTitle":"Flyio帮助文档",
   "git":"https://github.com/wendux/fly",
   "menus":[
-    {"title":"项目主页","icon":"fa-github","route":"https://github.com/wendux/fly"}
+    {"title":"切换语言","icon":"language","route":"/language"}
    ],
   "dirs":[
     {

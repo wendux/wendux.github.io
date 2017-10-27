@@ -1,29 +1,29 @@
 {
-  "pageTitle":"Flyio帮助文档",
+  "pageTitle":"Flyio Documentation",
   "git":"https://github.com/wendux/fly",
   "menus":[
-    {"title":"切换语言","icon":"language","route":"/language"}
+    {"title":"Switch language","icon":"language","route":"/language"}
    ],
   "dirs":[
     {
       "icon":"",
-      "title":"文档列表",
+      "title":"Documentation",
       "active": true,
       "list": [
         {
-          "title": "起步",
+          "title": "Get started",
           "file": "readme"
         },
         {
-          "title": "Node下增强的API",
+          "title": "Node enhanced API",
           "file": "node"
         },
         {
-          "title": "请求配置",
+          "title": "Request configuration",
           "file": "config"
         },
         {
-          "title": "请求重定向",
+          "title": "Request forwarding",
           "file": "redirect"
         },
         {
@@ -31,23 +31,24 @@
           "file": "engine"
         },
         {
-          "title": "Native实现Http Engine",
+          "title": "Http Engine implement",
           "file": "native"
         },
         {
-          "title": "全局Ajax拦截",
+          "title": "Global Ajax hook",
           "file": "hook"
         },
         {
-          "title": "微信小程序中使用",
+          "title": "Using in WeChat applet",
           "file": "wx"
         },
         {
-          "title": "与axios、Fetch的对比",
+          "title": "Compare with axios/Fetch",
           "file": "compare"
         },
         {
-          "title": "工程目录结构",
+          "title": "Project structure",
+
           "file": "files"
         },
         {

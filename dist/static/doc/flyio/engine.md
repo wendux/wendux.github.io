@@ -1,8 +1,9 @@
 # Http Engine
 
-Fly引入了Http engine 的概念，所谓 Http Engine，就是真正发起 http 请求的引擎，这在浏览器中就是`XMLHttpRequest` 或 `ActiveXObject` (IE)，而在node环境中，engine 可以用任何能发起网络请求的库／模块实现。 Fly正是通过在不同的环境更换不同的engine而实现同时支持 node 和 browser。
+> Fly引入了Http engine 的概念，**所谓 Http Engine，就是指真正发起 http 请求的引擎**，这在浏览器中就是`XMLHttpRequest` 或 `ActiveXObject` (IE)，而在node环境中，engine 可以用任何能发起网络请求的库或模块。而 **Fly 正是通过在不同环境切换不同engine的方式实现支持不同的javascript运行环境的**。
+>
 
-**切换engine**:
+## **切换engine**
 
 ```javascript
 var  fly=require("flyio")
@@ -12,7 +13,13 @@ fly.engine=XMLHttpRequest
 fly.engine=xx  //任何实现了engine接口的对象
 ```
 
-上面代码示意了 fly 如何切换 engine，那么如何来提供自定义的 engine, 本质上来讲，它就是一个和`XMLHttpRequest` 有相同接口、属性、行为的对象。这很糟糕，因为这必须得了解 `XMLHttpRequest` 的各个细节，为了简化 engine 的实现，Fly 提供了一个 engine-wrapper 模块，它是一个 engine 的骨架，开发者只需要实现一个适配器（adapter）便可方便的自动生成一个 engine。下面我们看看Fly内置的 node engine 的大概实现：
+上面代码示意了 fly 如何切换 engine，那么如何来提供自定义的engine?  
+
+本质上来讲，engine 就是一个和`XMLHttpRequest` 有相同接口、属性、行为的对象。显然，如果要自己纯手工实现一个 engine会很复杂，因为这必须得了解 `XMLHttpRequest` 的各个细节！
+
+为了简化 engine 的实现，Fly 提供了一个 engine-wrapper 模块，它是一个 engine 的骨架，开发者只需要实现一个适配器（adapter）便可方便的自动生成一个 engine。
+
+下面我们看看Fly内置的 node engine 是如何使用 engine-wrapper 来实现的：
 
 ```javascript
 var Fly = require("../../dist/npm/fly")
@@ -24,13 +31,17 @@ var engine=EngineWrapper(adapter)
 module.exports=new Fly(engine)
 ```
 
+可以看出，`EngineWrapper `可以通过一个 adapter直接生成一个engine, 那么现在的工作就转化为如何实现一个adapter了，后面我们会详细介绍，现在我们看一下engine唯一的 API:
+
 **`engine.setAdapter (adpter)`**
 
-每个 engine 可以随时切换adpter可实现和切换 http 引擎相同的目的。现在问题变得很简单，就是如何实现adapter.
+每个 engine 都可以随时切换adpter，这可以实现和切换 http engine相同的目的。
+
+
 
 ## Adapter
 
-通过上面的例子可以看出，真正的 http请求动作是在 adapter 中完成的。adapter是一个标准的接口，签名如下
+通过上面的例子可以看出，真正的 http请求动作是在 adapter 中完成的。而adapter是一个标准的接口，签名如下：
 
 ```javascript
 function (request, responseCallBack)
@@ -38,7 +49,7 @@ function (request, responseCallBack)
 
 **`request`**
 
- http请求信息，由engine 传给adapter，**基本结构字段**如下：
+ http请求信息，由engine-wrapper 传给adapter，**基本结构字段**如下：
 
 ```javascript
 {
@@ -52,7 +63,7 @@ function (request, responseCallBack)
 
 **`responseCallBack(response)`**
 
-响应回调，请求结束时adapter应调用此函数，通知engine请求结束, response **基本结构字段**如下：
+响应回调，请求结束时adapter应调用此函数，通知engine-wrapper请求结束, response **基本结构字段**如下：
 
 ```javascript
 {
@@ -67,11 +78,11 @@ function (request, responseCallBack)
 
 **基本结构字段：**
 
-所谓基本结构字段是fly定义的标准字段。除了这些基本结构字段，可以任意扩展：
+所谓基本结构字段就是指fly定义的标准字段。除了这些基本结构字段，也可以任意扩展**自定义字段**。
 
-对于 request对象， 用户在发起的请求配置 options 中的其它字段也会 merge 到 request 对象中，这样就可以在adapter 中获取到，这在自定义 adapte r时非常有用。
+对于 request对象， 用户在发起的请求配置 options 中的其它字段也会 merge 到 request 对象中，这样就可以在adapter 中获取到，这在自定义 adapter时非常有用。
 
-对于 response 对象，可以在 adapter  中给其添加任何自定义属性，然后上层在 then 回调中可以取出。
+对于 response 对象，可以在 adapter  中给其添加任何**自定义字段**，这些自定义字段会通过engine直接传递给fly，所以你可以在 then回调中取出。
 
 ### 一个简单的例子
 
@@ -97,21 +108,21 @@ fly.get("../package.json").then(d=>{
 
 ```
 
-这个例子中，adapter 并没有真正发起 http 请求，而是直接返回了固定内容，这样 fly 上层请求任何接口收到的内容永远都是相同的。
+在这个例子中，adapter 并没有真正发起 http 请求，而是直接返回了固定内容，这样 fly 上层请求任何接口收到的内容永远都是相同的。
 
 ## 远程Http Engine
 
-我们说过，在浏览器环境中，fly 使用的默认的 engine 就是 `XMLHttpRequest`。 如果能在 Native 上实现一个engine，然后供浏览器中的 fly 使用，那么也就会将原本应该在浏览器中发起的请求重定向到了 Native 上。而这个在 Native 上实现的 engine，我们称其为为远程 engine，这是因为调用者和执行者并不在同一个环境。我们看看在fly中如何使用远程 engine。在介绍这个之前，我们先来了解一下什么是 **Javascript Bridge** 。
+我们说过，在浏览器环境中，fly 使用的默认engine 就是 `XMLHttpRequest`。现在我们想想混合APP， 如果能在 Native 上实现一个engine，然后供浏览器中的 fly 使用，那么也就会将原本应该在浏览器中发起的请求重定向到了 Native 上。而这个在 Native 上实现的 engine，我们称其为远程 engine，这是因为调用者和执行者并不在同一个环境。在介绍在fly中如何使用远程 engine之前，我们得先来了解一下什么是 **Javascript Bridge** 。
 
 > Javascript Bridge 是指web应用中Javascript与Native之间接口互调，数据传输的一个桥梁。现在github中有一些成熟易用的移动端跨平台实现如: [dsBridge](https://github.com/wendux/DSBridge-Android) 、 [WebViewJavascriptBridge](https://github.com/marcuswestin/WebViewJavascriptBridge) 。
 
-通过 Javascript bridge，我们可以在 adapter 中将请求信息转发到 Natvie上，然后在 native 上发起真正的网络请求，这样就可以在native进行统一的证书验证、cookie管理、访问控制 、缓存策略等等。等到native请求完成后再将请求结果回传给 adapter ， 然后 adapter 再返回给 fly，整个请求流程结束。
+通过 Javascript bridge，我们可以在 adapter 中将请求信息转发到 Natvie上，然后在 native 上根据请求信息发起真正的网络请求。这样做的好处就是可以在native进行统一的证书验证、cookie管理、访问控制 、缓存策略等等。等到native请求完成后再将请求结果回传给 adapter ， 然后 adapter 再返回给 fly，整个请求流程结束。
 
 因为不同的 Javascript bridge， 数据传输的协议不同，我们只需为我们使用的 javascript bridge 提供一个 adapter 即可。fly 预置了 DSBridge 的 adapter 。
 
 ### DSBridge Adapter
 
-[dsBridge](https://github.com/wendux/DSBridge-Android)  是一个优秀的跨平台的 Javascript Bridge ，最大的特点是不仅支持**异步调用**，也支持**异步调用**和进度**连续调用**。如果你的 App 使用的是DSBridge， 那么你可以非常方便的使用fly。
+[dsBridge](https://github.com/wendux/DSBridge-Android)  是一个优秀的跨平台的 Javascript Bridge ，最大的特点是不仅支持**异步调用**，也支持**同步调用**和进度**连续调用**。如果你的 App 使用的是DSBridge， 那么你可以非常方便的使用fly。
 
 ```javascript
 var adapter = require("flyio/dist/npm/adapter/dsbridge")
@@ -124,7 +135,7 @@ var fly = new Fly(engine);
 fly.get("xxx.com")...
 ```
 
-现在在h5中通过fly发起的所有ajax请求都会被重定向到端上，下一节我们看看Native端改如何实现。
+现在在h5中通过fly发起的所有ajax请求都会被重定向到端上。
 
 ### Native实现
 

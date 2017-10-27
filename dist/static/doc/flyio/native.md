@@ -3,16 +3,14 @@
 本文将以 Android 为例，从头来实现一个Http Engine。
 
 > 我们使用的DSBridge为H5和Native的通信桥梁（ Javascript Bridge ），关于DSBridge介绍请参考 
->
 > Android: https://github.com/wendux/DSBridge-Android
->
 > IOS: https://github.com/wendux/DSBridge-IOS
 
 
 
 ### 第一步：Native端注册API
 
-我们在APP中注册处理ajax请求的API：
+我们在APP中注册处理ajax请求的API，命名为 `onAjaxRequest`：
 
 ```java
  @JavascriptInterface
@@ -23,7 +21,7 @@
  }
 ```
 
-### 第二步：H5侧提供adapter
+### 第二步：H5实现adapter
 
 我们使用的是DSBridge, 可以直接调用Native中注册的 `onAjaxRequest`，下面是adapter/dsbridge.js的部分代码：
 
@@ -35,7 +33,7 @@ adapter = function (request, responseCallBack) {
 }
 ```
 
-可以看到 adapter 直接通过dsBridge的call方法将请求对象传给了Native，Native再完成真正的http请求后会回调 `responseCallBack`，responseData 即为响应数据。
+可以看到 adapter 直接通过dsBridge的call方法将请求对象传给了Native，Native在完成真正的http请求后会回调 `responseCallBack`，responseData 即为响应数据。
 
 ### 第三步：更换新engine
 
@@ -57,8 +55,6 @@ var fly = new Fly(dsEngine);
 ## Android实现真正的网络请求
 
 我们以Android下著名的http网络库okhttp为例 ，给出大概实现：
-
-
 
 ```javascript
 @JavascriptInterface 

@@ -1,14 +1,16 @@
 # 全局Ajax拦截
 
-大多数情况下，我们的 Ajax 请求都是通过前端的开发库、框架发出的，如 jQuery、axios 或者 Fly。这些库自身都会有一些请求／响应钩子，用于预处理 Ajax请求和响应。但是如果你没有使用这些网络库，又或是你并不是网页的开发者，而你需要分析某个网页的所有Ajax请求，又或是你是一个应用开发者，你的webview中需要拦截所有网页的网络请求（网页并不是你开发的）...... 这种时候，你就需要拦截全局的 Ajax 请求。
+大多数情况下，我们的 Ajax 请求都是通过前端的开发库、框架发出的，如 jQuery、axios 或者 Fly。这些库自身都会有一些请求／响应钩子，用于预处理 Ajax请求和响应。但是，如果你没有使用这些网络库，又或是你并不是网页的开发者，而你需要分析某个网页的所有Ajax请求，又或是你是一个应用开发者，你的webview中需要拦截所有网页的网络请求（网页并不是你开发的）...... 这种时候，你就需要拦截全局的 Ajax 请求。
 
 ## 原理
 
-无论是上层是通过何种方式发起的 Ajax 请求，最终都会回归到 `XMLHttpRequest` 。 所以，拦截的本质就是替换浏览器原生的 `XMLHttpRequest` 。具体就是，在替换之前保存先保存 `XMLHttpRequest`，然后在请求过程中根据具体业务逻辑决定是否需要发起网络请求，如果需要，再创建真正的 `XMLHttpRequest` 实例。
+无论你的应用是通过那个框架或库发起的 Ajax 请求，最终都会回归到 `XMLHttpRequest` 。 所以，拦截的本质就是替换浏览器原生的 `XMLHttpRequest` 。具体就是，在替换之前保存先保存 `XMLHttpRequest`，然后在请求过程中根据具体业务逻辑决定是否需要发起网络请求，如果需要，再创建真正的 `XMLHttpRequest` 实例。
 
-## 自定义engine
+## Fly 拦截全局ajax
 
-我们知道，在 Fly 中，`XMLHttpRequest`  就是一个 [http engine](#/doc/flyio/engine)。而 Fly 提供了快速生成 engine 的工具，所以我们可以很方便的实现 Ajax拦截。我们先看一个简单的输出每次网络请求 url 和 method的例子：
+我们知道，在 Fly 中，`XMLHttpRequest`  就是一个 [http engine](#/doc/flyio/engine)。所以我们要拦截，只需要自定义一个engine替换掉全局的`XMLHttpRequest` 就行，而 Fly 提供了快速生成 engine 的工具，所以我们可以很方便实现拦截。
+
+我们先看一个简单的例子，功能是输出每次网络请求 url 和 method。
 
 ### 实现一
 
@@ -46,7 +48,7 @@ axios.post("../package.json").then(log)
 > {data: {…}, status: 200, statusText: "OK", headers: {…}, config: {…}, …}
 ```
 
-控制台中输出了请求的 url 和 method， 第二行的结果对象是axios `then`打印出的。
+可以看到控制台中输出了请求的 url 和 method，我们的拦截成功了。而 第二行的结果对象是axios `then`打印出的。
 
 上面的例子只是一个简单的示例，并不完善，如没有同步header、也没有超时处理，在生产环境下，你当然可以手动去完善这些细节，但是，仔细想想，是不是有更简单的方法？
 

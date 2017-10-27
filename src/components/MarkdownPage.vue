@@ -7,7 +7,7 @@
           style="margin-top: 50px; background: #f1f1f1; padding: 12px; font-weight: bold; border-radius: 2px"
         >
           <div v-if="current.next">
-            下一篇： <a :href="`#/doc/${path}/${current.next.file}`" style="text-decoration: none">
+            Next： <a :href="`#/doc/${path}/${current.next.file}`" style="text-decoration: none">
             {{current.next.title}}
           </a>
           </div>

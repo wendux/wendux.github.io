@@ -10,7 +10,7 @@ Node adapter 使用了 [request](https://github.com/request/request) 库，向�
 
  **`download (url, savePath, params = null, options={})`** 
 
- url 为下载地址，savePath为下载成功后保存的路径，params 为请求参数，默认为null。返回一个`Promise`对象，一个简单的示例如下：
+ url 为下载地址，savePath为下载成功后文件保存的路径，params 为请求参数，默认为null。返回一个`Promise`对象，一个简单的示例如下：
 
 ```javascript
 var fly=require("flyio")
@@ -31,6 +31,10 @@ fly.download("http://localhost:8089/static/v.png", "./v.png")
   path:"/user/wendux/xx/v.png" //下载文件保存在本地的绝对路径
 }
 ```
+
+**options**
+
+options 为请求配置，您可以设置自定义header等。详情请参见 [请求配置](#/doc/flyio/config) 。
 
 ### 底层
 
@@ -83,6 +87,10 @@ upload会将请求的 `content-type` 设为 “multipart/form-data”。
 
 > ⚠️ 大多数http服务器对单次请求上传文件的大小都有限制，不建议在一次请求中上传多个文件。
 
+**options**
+
+options 为请求配置，您可以设置自定义header等。详情请参见 [请求配置](#/doc/flyio/config) 。
+
 
 
 ## $http
@@ -94,7 +102,7 @@ upload会将请求的 `content-type` 设为 “multipart/form-data”。
 fly.$http('http://google.com/doodle.png')
   .pipe(fs.createWriteStream('doodle.png'))
 //post请求
-request.post('http://service.com/upload', {form:{key:'value'}})
+fly.$http.post('http://service.com/upload', {form:{key:'value'}})
 ```
 
 详细的文档请移步 [Github request](https://github.com/request/request#requestoptions-callback) 。
@@ -107,11 +115,4 @@ Node下创建新实例时，要引用 `src/node/index.js`:
 var Fly= require("./src/node")
 var newFly=new Fly;
 ```
-
-
-
-
-## 请求配置
-
-如果在上传或下载文件时，需要定制请求参数，如设置 header，那么你应该直接调用 `request` 方法，通过第三个参数 options 去配置。所有选项请参考 [请求配置](#/doc/flyio/config) 。
 
