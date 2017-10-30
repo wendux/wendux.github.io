@@ -1,4 +1,4 @@
-# Global Ajax interception 
+# Global Ajax interception
 
 In most cases, our Ajax requests are issued through the front-end development library and framework, such as jQuery, Axios or Fly。Although these libraries themselves have some request / response  interceptors, they can be used to preprocess Ajax requests and responses. However, if you do not use the network library, or for some web pages that aren't developed by you, you want to analyze the Ajax requests they launch , or you're a hybrid application developer, and you need to intercept all http requests in your WebView (web pages aren't yours)... At this point, you need to intercept the **global** Ajax request
 
@@ -58,7 +58,7 @@ The above example is a simple demon, it is not perfect, because it has no header
 var log = console.log;
 // Switch fly engine to XMLHttpRequest
 fly.engine = XMLHttpRequest;
-// Create a custom http engine to replace  XMLHttpRequest 
+// Create a custom http engine to replace  XMLHttpRequest
 var engine = EngineWrapper(function (request, responseCallback) {
     // Output request URL and  method
     console.log(request.url, request.method)
@@ -66,9 +66,9 @@ var engine = EngineWrapper(function (request, responseCallback) {
     fly.request(request.url, request.data, request)
         .then(function (d) {
             responseCallback({
-                statusCode: d.xhr.status,
-                responseText: d.xhr.responseText,
-                statusMessage: d.xhr.statusText
+                statusCode: d.engine.status,
+                responseText: d.engine.responseText,
+                statusMessage: d.engine.statusText
             })
         })
         .catch(function (err) {

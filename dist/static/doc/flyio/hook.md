@@ -64,9 +64,9 @@ var engine = EngineWrapper(function (request, responseCallback) {
     fly.request(request.url, request.data, request)
         .then(function (d) {
             responseCallback({
-                statusCode: d.xhr.status,
-                responseText: d.xhr.responseText,
-                statusMessage: d.xhr.statusText
+                statusCode: d.engine.status,
+                responseText: d.engine.responseText,
+                statusMessage: d.engine.statusText
             })
         })
         .catch(function (err) {
