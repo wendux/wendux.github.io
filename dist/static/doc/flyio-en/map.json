@@ -31,11 +31,11 @@
           "file": "engine"
         },
         {
-          "title": "Http Engine implement",
+          "title": "Http Engine implementation",
           "file": "native"
         },
         {
-          "title": "Global Ajax hook",
+          "title": "Global Ajax interception",
           "file": "hook"
         },
         {

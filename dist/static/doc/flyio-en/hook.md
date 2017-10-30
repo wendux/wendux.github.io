@@ -1,27 +1,27 @@
-# 全局Ajax拦截
+# Global Ajax interception 
 
-大多数情况下，我们的 Ajax 请求都是通过前端的开发库、框架发出的，如 jQuery、axios 或者 Fly。这些库自身都会有一些请求／响应钩子，用于预处理 Ajax请求和响应。但是，如果你没有使用这些网络库，又或是你并不是网页的开发者，而你需要分析某个网页的所有Ajax请求，又或是你是一个应用开发者，你的webview中需要拦截所有网页的网络请求（网页并不是你开发的）...... 这种时候，你就需要拦截全局的 Ajax 请求。
+In most cases, our Ajax requests are issued through the front-end development library and framework, such as jQuery, Axios or Fly。Although these libraries themselves have some request / response  interceptors, they can be used to preprocess Ajax requests and responses. However, if you do not use the network library, or for some web pages that aren't developed by you, you want to analyze the Ajax requests they launch , or you're a hybrid application developer, and you need to intercept all http requests in your WebView (web pages aren't yours)... At this point, you need to intercept the **global** Ajax request
 
-## 原理
+## Principle
 
-无论你的应用是通过那个框架或库发起的 Ajax 请求，最终都会回归到 `XMLHttpRequest` 。 所以，拦截的本质就是替换浏览器原生的 `XMLHttpRequest` 。具体就是，在替换之前保存先保存 `XMLHttpRequest`，然后在请求过程中根据具体业务逻辑决定是否需要发起网络请求，如果需要，再创建真正的 `XMLHttpRequest` 实例。
+No matter what framework or library Ajax request is initiated by your application, you will eventually call the `XMLHttpRequest` object. So, the essence of interception is to replace the browser original `XMLHttpRequest`.
 
-## Fly 拦截全局ajax
+## Intercepting global Ajax by Fly
 
-我们知道，在 Fly 中，`XMLHttpRequest`  就是一个 [http engine](#/doc/flyio/engine)。所以我们要拦截，只需要自定义一个engine替换掉全局的`XMLHttpRequest` 就行，而 Fly 提供了快速生成 engine 的工具，所以我们可以很方便实现拦截。
+We know that in Fly, `XMLHttpRequest` is a [HTTP Engine](#/doc/flyio-en/engine). So we want to intercept, just need to customize a engine, replace the global `XMLHttpRequest` object.  And Fly provides a quick tool(engine-wrapper) to generate a new Http Engine.
 
-我们先看一个简单的例子，功能是输出每次网络请求 url 和 method。
+Let's look at a simple example of the output of each network request URL and method。
 
-### 实现一
+### The first implementation
 
 ```javascript
  var EngineWrapper = require("flyio/dist/npm/engine-wrapper")
- //保存XMLHttpRequest
+ // Save original XMLHttpRequest
  var realXMLHttpRequest=XMLHttpRequest;
  var engine= EngineWrapper(function (request,responseCallback) {
-   //输出请求链接和请求方法
+   // Output request URL and  method
    console.log(request.url,request.method)
-   //发起真正的请求
+   // Perform real http request
    var xhr=new realXMLHttpRequest()
    xhr.open(request.method,request.url);
    xhr.send(request.body);
@@ -38,29 +38,31 @@
  XMLHttpRequest=engine;
 ```
 
-我们用 axios 发起一个请求测试一下：
+We start a request test with Axios：
 
 ```javascript
 axios.post("../package.json").then(log)
 
-//控制台输出
+// Output
 > http://localhost:63341/Fly/package.json POST
 > {data: {…}, status: 200, statusText: "OK", headers: {…}, config: {…}, …}
 ```
 
-可以看到控制台中输出了请求的 url 和 method，我们的拦截成功了。而 第二行的结果对象是axios `then`打印出的。
+You can see the output of the requested URL and method in the console, and our interception succeeded. And the result of the second line is printed by Axios `then`。
 
-上面的例子只是一个简单的示例，并不完善，如没有同步header、也没有超时处理，在生产环境下，你当然可以手动去完善这些细节，但是，仔细想想，是不是有更简单的方法？
+The above example is a simple demon, it is not perfect, because it has no header synchronization and no timeout processing and soon on.  Of course  you can manually to complete these details, but think about it, is there an easier way?
 
-### 实现二
+### The Second implementation
 
 ```javascript
 var log = console.log;
-//切换fly engine为真正的XMLHttpRequest
+// Switch fly engine to XMLHttpRequest
 fly.engine = XMLHttpRequest;
+// Create a custom http engine to replace  XMLHttpRequest 
 var engine = EngineWrapper(function (request, responseCallback) {
+    // Output request URL and  method
     console.log(request.url, request.method)
-    //发起真正的ajax请求
+    // Perform real http request
     fly.request(request.url, request.data, request)
         .then(function (d) {
             responseCallback({
@@ -76,17 +78,14 @@ var engine = EngineWrapper(function (request, responseCallback) {
             })
         })
 })
-//覆盖默认
+// Replace XMLHttpRequest with our custom engine
 XMLHttpRequest = engine;
+// Perform a http request by Axios
 axios.post("../package.json").then(log)
-
 ```
 
-因为 Fly支持切换engine, 我们可以直接先将 fly engine 切换为真正的 `XMLHttpRequest` ，然后再覆盖，这样fly中的网络请求都是通过真正的 `XMLHttpRequest` 发起的 (事实上， 浏览器环境下 fly 默认的 engine本就是 `XMLHttpRequest`，无需手动切换，此处为了清晰，故手动切换了一下)。fly 会根据request对象自动同步请求头。如果想阻止请求，直接在 adapter 中 return 即可。
+In fact, in the browser environment, ` XMLHttpRequest` is the default http engine of Fly , without the need to manually switch here, in order to clear the manual switch at。Fly automatically synchronizes the request config such as headers 、timeout and so on, according to the request object. If you want to stop the request, you can just direct `return` in adapter.
 
+## Other interception ways
 
-
-## 其它的拦截方法
-
-Github上的开源库 [Ajax-hook](https://github.com/wendux/Ajax-hook) 也可以拦截全局的的ajax请求，不同的是，它可以拦截ajax请求的每一步，每一个回调，不仅强大，而且也很轻量（1KB）。和上面通过 fly engine 拦截的方式相比 ，Ajax-hook的拦截粒度更细，但Ajax-hook由于使用了ES5的 `getter`、`setter`，所以不支持IE9以下的浏览器。
-
+Another open source library [Ajax-hook](https://github.com/wendux/Ajax-hook )  can also intercept the global Ajax request. Unlike that, Unlike fly, it can intercept every step of the Ajax request, each callback. It's not only powerful, but also lightweight (1KB). Compared with the way fly engine intercepts above, Ajax-hook has finer granularity of interception, but Ajax-hook does not support browsers below IE9 because of the use of ES5's getter and setter.

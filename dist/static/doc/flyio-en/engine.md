@@ -17,7 +17,7 @@ fly.engine=xx
 
 The code above shows how fly switches  http engine, so how do you provide a custom engine?
 
-Essentially,  http engine is an object that has the same interface, attribute, and behavior as `XMLHttpRequest`. Obviously, it's very complicated to implement a engine manually by yourself, because you have to understand all the details of `XMLHttpReques`t!
+Essentially,  http engine is an object that has the same interface, attribute, and behavior as `XMLHttpRequest`. Obviously, it's very complicated to implement a engine manually by yourself, because you have to understand all the details of `XMLHttpRequest`!
 
 It is a skeleton of engine, and developers only need to implement an adapter for it, and it can automatically generate a engine automatically.
 

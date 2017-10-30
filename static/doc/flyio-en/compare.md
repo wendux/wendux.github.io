@@ -1,104 +1,46 @@
-# 与axios和Fetch对比
+# Compare with axios
 
-在Angular、React、Vue这些移动端web框架大行其道的今天，很大的改变了WEB应用的开发方式。而这些框架通常都只专注于View层，而对于http请求，开发者一般都会单独引入一个http 请求库，如axios。笔者也是从使用axios过来的，但随着项目的使用，觉得 axios 不尽完美，在一些场景用起来并不舒服，所以才有了Fly。
+The author was also using Axios, but with the increase of the project experience, found that in some scenarios, Axios is not perfect.
 
-在设计 Fly 的过程中，为了符合使用习惯，借鉴了axios（但并不完全兼容），下面将 Fly 和 axios做一个详细的对比：
+In the process of designing Fly, in order to conform to the habits of Axios users,  referring to the Axios interface (but not fully compatible).  the following is a detailed comparison between Fly and Axios.
 
-## 共同点
+## Similarities
 
-1. 都支持Promise API
-2. 都同时支持Node和Browser环境
-3. 都支持请求／响应拦截器
-4. 都支持自动转换 JSON
+1. Supports the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
+2. Support Node and Browser environment
+3. Supports  request and response interceptors
+4. Automatic transforms for JSON data
 
-## 不同点
+## Differences
 
-### 浏览器环境
+### In browser
 
-axios支持请求取消和全局配置，而 fly 不支持请求取消，fly的配置支持实例级别和单次请求级别，其余功能基本不分伯仲，在体积上，fly.min.js只有4K左右，而axios.min.js 12K左右。Fly更轻量，集成成本更低。
+1. Axios supports request cancellation, while fly does not support request cancellation;
+2.  Axios supports global configuration and instance level configuration, and fly configuration supports instance level and single request level.
+3. Fly is lighter, lower integration cost, `fly.min.js` is only about 4K, while `axios.min.js` is about 12K
 
-### Node环境
+### In Node
 
-Node下 Fly 的功能要明显强于axios，Fly在node下不仅提供了文件下载、上传的API，而且还可以通过 `fly.$http` 直接调用 [request 库 ](https://github.com/request/request) 的所有功能，详情请参照[Node下增强的API](#/doc/flyio/node) 。
+In Node environment, the function of Fly is obviously powerful than that of Axios. Fly in node not only provides the file download, upload API, but also, through `fly.$http`,  you can call all the functions of the [request library](https://github.com/request/request)  directly , more details please refer to [Node enhanced API](#/doc/flyio-en/node).
 
-### 请求转发
+### Request forwarding
 
-Fly最大的特点就是在混合APP中支持请求转发，而axios不支持，关于请求转发的详细内容请参照[请求重定向](#/doc/flyio/redirect) 。
+The most unique and powerful feature of Fly is that it supports request forwarding in hybrid application, while Axios does not support . more details please refer to [request redirection](#/doc/flyio-en/redirect) .
 
 ### Http Engine
 
-Fly中提出了Http Engine的概念，Fly可以通过更换Http Engine的方式实现很多有趣的功能，比如全局Ajax拦截，详情请参考 [全局ajax拦截](#/doc/flyio/hook) 。
+Fly introduces the concept of Http Engine,  by switching Http Engine, Fly can 
 
-### 设计思想
+1. support different JavaScript runtimes , such as node, browser , JsCore and soon on. 
+2. Implement some interesting functions like  [Global Ajax interception](#/doc/flyio-en/hook)
 
-Fly采用分层的设计思想，将上层用户接口和底层Http Engine分离。采用适配器模式，让实现Http Engine变的非常容易。正是这样的框架设计，可以通过替换底层Http Engine的方式，使得fly能够在灵活的支持各种环境的同时又能保证上层接口的一致性。还有，通过adapter，用户完全可以自定义http请求的实现.......还有很多高级的玩法。
+More details please refer to [http engine](#/doc/flyio-en/engine) .
 
-## Fetch
+### Design idea
 
-Fetch的接口设计要好于 XMLHttpRequest，但是，由于Fetch本身的一些特点，导致其在使用时也不是很方便，下面我们看一个post请求的例子：
-
-```javascript
-fetch("doAct.action", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-    },
-    credentials: 'include',
-    body: "key=value"
-}).then(function(res) {
-    if (res.ok) {
-        // To do with res
-    } else if (res.status == 401) {
-        // To do with res
-    }else if(res.status == 404){
-       //
-    }else if(res.status==500){
-       // 
-    }
-})
-.catch(function(e) {
-    // Handling errors
-});
-```
+Fly adopts the layered design idea to separate the upper user interface and the underlying Http Engine. Using adapter mode makes it very easy to implement a  Http Engine.  Because of this framework design, by switching the underlying Http Engine, fly can flexibly support a variety of Javascript runtimes while ensuring the consistency of the upper layer interface. Also, through adapter, the user can completely customize the implementation of the HTTP request... There are many advanced gameplay .
 
 
 
-上面有三点要注意：
 
-1. 必须手动设置header的 `content-type`，Fetch不会自动设置。
-2. 必须手动设置  `credentials`，Fetch默认不带cookie。
-3. 像40X、50X这种http 状态错误是不会触发`catch`，需要在then中处理。
-
-除此之外，Fetch：
-
-1. 不支持请求／响应拦截器，这在设置一些全局的参数、请求头时很有用。
-2. 不支持Node
-3. 浏览器支持程度不同。
-
-#### 另一个角度
-
-我们用 `XMLHttprequest` 来实现上述功能其实代码量也差不多：
-
-```javascript
-var xhr = new XMLHttpRequest();
-xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
-xhr.open('post', "doAct.action");
-xhr.onload = function() {
-    if (xhr.status>=200&&xhr.status<300) {
-        // To do with res
-    } else if (xhr.status == 401) {
-        // To do with res
-    }else if(xhr.status == 404){
-       //
-    }else if(xhr.status==500){
-       // 
-    }
-};
-xhr.onerror = function() {
-    // Handling errors
-};
-xhr.send("key=value");
-```
-
-既然代码量又差不多，为什么在 XMLHttprequest 时代我们还是要引一个 http请求库，答案是 **方便**。不可否认，Fetch是比 XMLHttprequest 的接口好很多，但是即使使用Fetch，也不是很方便。而fly也会在合适的时候支持Fetch。
 
