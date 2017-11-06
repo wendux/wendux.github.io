@@ -25,25 +25,6 @@
    > 1. The scene is very few;  need to request the cancellation of the scene is common in need of concurrency, network request intensive scene, whether in the browser or node client, JavaScript are not applicable to this scene.
    > 2. Essentially, as long as the request is sent, it's hard to completely cancel the request, and many of the cancellation implementations just don't deal with the return result。
 
-5. **Fly has no delete, put, patch these methods?**
 
-   > Considering that the RESTful API scene is not much, and these methods are also very simple to implement, because fly's goal is lightweight, so these methods are not provided, but you can easily implement these methods through the` request` method of fly , such as：
-   >
-   > ```javascript
-   > // DELETE  request
-   > fly.request("/user/8/delete", null, {method:"delete"})
-   > //PUT request
-   > fly.request("/user/register", {name:"doris"}, {method:"PUT"})
-   > ```
-   >
-   > In fact, to support  just a few codes：
-   >
-   > ```javascript
-   > ["delete","put","patch"].forEach(e=>{
-   >   fly[e]=function(url,data,option){
-   >     return this.request(url,data,Object.assign({method:e},option))
-   >   }
-   > })
-   > ```
 
    ​

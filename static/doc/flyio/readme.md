@@ -308,6 +308,7 @@ options为请求配置项。
 
 发起请求，参数含义同上，在使用此API时需要指定options 的method：
 
+
 ```javascript
 //GET请求
 fly.request("/user/8" null, {method:"get"})
@@ -318,7 +319,15 @@ fly.request("/user/register", {name:"doris"}, {method:"PUT"})
 ......
 ```
 
-request 适合在 [RESTful API](http://en.wikipedia.org/wiki/Representational_state_transfer) 的场景下使用。
+request 适合在 [RESTful API](http://en.wikipedia.org/wiki/Representational_state_transfer) 的场景下使用，为了方便使用，fly提供了响应的别名方法
+
+**别名方法**
+
+`fly.put(url, data, options)`
+
+`fly.delete(url,data,options)`
+
+`fly.patch(url,data,options)`
 
 #### `fly.all([])`
 

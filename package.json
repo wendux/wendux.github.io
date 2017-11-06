@@ -10,7 +10,7 @@
     "gen-menus": "node build/generate-menus.js "
   },
   "dependencies": {
-    "flyio": "^0.2.3",
+    "flyio": "^0.2.4",
     "marked": "^0.3.6",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0",

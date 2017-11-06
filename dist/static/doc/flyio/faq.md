@@ -23,26 +23,4 @@
    > 1. 请求取消的场景很少，需要请求取消的场景常见于需要并发、网络请求密集的场景，而无论是在浏览器端还是node端，javascript 都不太适用于这样的场景（注意，这和node作为网络服务器不同，fly是请求的发起方而不是处理方，node 适用于处理高并发的场景没错，但并不适合发起密集的网络请求）。
    > 2. 本质上来讲，只要请求发出，基本很难完全取消请求，很多的取消实现只是不处理返回结果而已。
 
-5. **fly没有 delete、put、patch这些方法吗？**
-
-   > 考虑到 RESTful API的场景并不多，而这些方法实现也很简单，由于fly的定位是轻量，所以没有提供这些方法，但是，您可以通过request方法很容易实现如：
-   >
-   > ```javascript
-   > //DELETE 请求
-   > fly.request("/user/8/delete", null, {method:"delete"})
-   > //PUT请求
-   > fly.request("/user/register", {name:"doris"}, {method:"PUT"})
-   >
-   > ```
-   >
-   > 其实要让fly支持也就是几句代码的事：
-   >
-   > ```javascript
-   > ["delete","put","patch"].forEach(e=>{
-   >   fly[e]=function(url,data,option){
-   >     return this.request(url,data,Object.assign({method:e},option))
-   >   }
-   > })
-   > ```
-
    ​
