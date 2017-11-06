@@ -40,7 +40,7 @@
    > ```javascript
    > ["delete","put","patch"].forEach(e=>{
    >   fly[e]=function(url,data,option){
-   >     return this.request(url,data,Object.assign({method:e},options))
+   >     return this.request(url,data,Object.assign({method:e},option))
    >   }
    > })
    > ```
