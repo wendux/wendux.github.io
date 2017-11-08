@@ -21,9 +21,11 @@
 </template>
 
 <script>
-location.href="https://github.com/wendux"
 export default {
   name: 'hello',
+  created(){
+    location.href="https://github.com/wendux"
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
