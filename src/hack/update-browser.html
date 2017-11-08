@@ -9,19 +9,6 @@
       color: teal;
     }
   </style>
-  <script>
-    var DEFAULT_VERSION = 10;
-    var ua = navigator.userAgent.toLowerCase();
-    var isIE = ua.indexOf("msie")>-1;
-    var safariVersion;
-    if(isIE){
-      safariVersion =  ua.match(/msie ([\d.]+)/)[1];
-      var sa = parseInt(safariVersion);
-      if(sa > DEFAULT_VERSION ){
-        location.href="../"
-      }
-    }
-  </script>
 </head>
 <body style="padding: 30px">
 <h2 style="text-align: center;">
