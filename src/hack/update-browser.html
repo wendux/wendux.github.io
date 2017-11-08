@@ -21,7 +21,9 @@
         location.href="../"
       }
     }else{
-      location.href="../"
+      if(ua.indexOf('Trident/')==-1){
+        location.href="../"
+      }
     }
   </script>
 </head>
