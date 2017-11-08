@@ -1,7 +1,7 @@
 require('./check-versions')()
 
 process.env.NODE_ENV = 'production'
-
+require('shelljs/global')
 var ora = require('ora')
 var rm = require('rimraf')
 var path = require('path')
@@ -17,6 +17,7 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   webpack(webpackConfig, function (err, stats) {
     spinner.stop()
     if (err) throw err
+    cp('-rf', 'src/hack/.', config.build.assetsRoot+"/hack")
     process.stdout.write(stats.toString({
       colors: true,
       modules: false,
