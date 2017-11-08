@@ -19,7 +19,7 @@
       if(ua.indexOf('Trident/')!=-1){
         var vds = document.createElement('script');
         vds.type = 'text/javascript';
-        vds.async = true;
+        vds.async = false;
         vds.src = '//cdn.bootcss.com/babel-polyfill/7.0.0-beta.2/polyfill.min.js';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(vds, s);
