@@ -16,7 +16,7 @@
 <style lang="stylus">
   @import "./stylus/main.styl"
   body {
-    font-family: 'Source Sans Pro', 'Helvetica Neue', 'Roboto', Arial, sans-serif !important;
+    font-family: Arial, Helvetica, 'Microsoft Yahei', "微软雅黑",sans-serif !important;
     -webkit-font-smoothing: antialiased;
     word-break: break-word;
     box-sizing: border-box;

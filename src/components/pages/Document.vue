@@ -85,7 +85,7 @@
         clipped: false,
         drawer: false,
         items: [
-          { icon: 'fa-github', title: 'Github Home page' , route:"https://github.com/wendux"}
+          { icon: 'home', title: 'Home page' , route:"/"}
         ],
         store: store,
         show:false,
