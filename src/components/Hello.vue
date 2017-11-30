@@ -4,47 +4,57 @@
   <!--</div>-->
   <div style="position: relative">
     <canvas id="canvas"></canvas>
-    <div style="position: absolute; top:20px; right: 20px; z-index: 2" id="nav-t">
-      <a href="https://juejin.im/user/58211b88a0bb9f0058c25b7f" style="margin-right: 16px">Blog</a>
-      <a href="https://github.com/wendux">Github</a>
+    <div style="position: absolute; top:5px; right: 10px; z-index: 2; font-size: 16px" id="nav-t" class="hidden-xs-only">
+      <v-btn  icon href="https://github.com/wendux"><v-icon>fa-github</v-icon></v-btn>
+      <v-btn  icon href="https://juejin.im/user/58211b88a0bb9f0058c25b7f"><v-icon>more_vert</v-icon></v-btn>
     </div>
     <div style="position: absolute; top:0;left: 0; width: 100%; text-align: center; color: #333; font-size: 16px">
-      <div style="height: 3px; background:-webkit-linear-gradient(left,deepskyblue,cornflowerblue)"></div>
+      <!--<div style="height: 3px; background:-webkit-linear-gradient(left,deepskyblue,cornflowerblue)"></div>-->
       <img src="~@/assets/me.png" style="width: 80px; border-radius: 40px; margin-top: 15vh"/>
       <div style="margin-top: 10px; line-height: 1.7em ">唯有深入，方能浅出<br>不做搬运工，只做高价值内容的生产者<br>我是杜文，欢迎大家关注我</div>
-      <div style="padding: 10px 0;" id="nav-b">
+      <div style="padding: 10px 0;" class="hidden-sm-and-up">
         <a href="https://juejin.im/user/58211b88a0bb9f0058c25b7f" style="margin-right: 16px">Blog</a>
         <a href="https://github.com/wendux">Github</a>
       </div>
-      <div style="padding: 10px 0;" id="tag">
-        <a href="https://github.com/wendux/ajax-hook">ajax hook</a>
-        <a href="https://wendux.github.io/dist/#/doc/flyio/readme" style="margin-left: 16px">fly.js</a>
-        <a href="https://github.com/wendux/DSBridge-Android" style="margin-left: 16px">DSBridge</a>
-        <a href="http://neat.dtworkroom.com/" style="margin-left: 16px">neat.js</a>
-        <a href="http://dspider.dtworkroom.com/" style="margin-left: 16px">DSpider</a>
+      <div style="padding: 10px 0;" id="tag" class="hidden-xs-only">
+        <!--<a href="https://github.com/wendux/DSBridge-Android"-->
+           <!--v-tooltip:bottom="{ html: '同时支持同步调用和异步调用的跨平台Javascript bridge' }">-->
+          <!--DSBridge-->
+        <!--</a>-->
+        <!--<a href="https://wendux.github.io/dist/#/doc/flyio/readme"-->
+           <!--v-tooltip:bottom="{ html: '支持所有Javascript运行时的http client' }" :ripple="true">-->
+          <!--fly.js-->
+        <!--</a>-->
+        <!--<a href="https://github.com/wendux/ajax-hook"-->
+           <!--v-tooltip:bottom="{ html: '拦截全局ajax请求的库' }"-->
+        <!--&gt;-->
+          <!--ajax-hook-->
+        <!--</a>-->
+        <!--<a href="http://neat.dtworkroom.com/"-->
+           <!--v-tooltip:bottom="{ html: '极致简洁、强大、优雅的jquery兼容的库 ' }"-->
+        <!--&gt;neat.js</a>-->
+        <!--<a href="http://dspider.dtworkroom.com/"-->
+           <!--v-tooltip:bottom="{ html: '移动端数据爬取平台 ' }"-->
+        <!--&gt;DSpider</a>-->
+      <!--</div>-->
+        <a href="https://github.com/wendux/DSBridge-Android">DSBridge</a>
+        <a href="https://wendux.github.io/dist/#/doc/flyio/readme">fly.js</a>
+        <a href="https://github.com/wendux/ajax-hook">ajax-hook</a>
+        <a href="http://neat.dtworkroom.com/">neat.js</a>
+        <a href="http://dspider.dtworkroom.com/">DSpider</a>
       </div>
     </div>
   </div>
 </template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  #nav-b {
-    display: none;
-    text-decoration: underline;
-  }
-  @media screen and (max-width: 600px) {
-    #nav-t{
-      display: none;
-    }
-    #nav-b{
-      display: block;
-    }
-    #tag{
-      display: none;
+<style  scoped lang="stylus">
+  $themeColor=rgb(19, 94, 148);
+  #nav-t{
+    a{
+      color:$themeColor;
     }
   }
-
   h1, h2 {
     font-weight: normal;
   }
@@ -61,13 +71,10 @@
 
   a {
     color: rgba(19, 94, 148, .7);
-    text-decoration: none;
-    transition: all .3s;
   }
 
   a:hover {
     color: rgba(19, 94, 148, 1);
-
   }
 
   #tag a {
@@ -79,13 +86,18 @@
     background: rgba(19, 94, 148, .8);
     border-radius: 15px;
     color: white;
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-left: 16px;
+    box-shadow: 0px 0px 2px $themeColor;
+    text-decoration none
+    transition: all .3s;
   }
 
   #tag a:hover {
     background: rgba(19, 94, 148, 1);
+    box-shadow: 0px 0px 10px $themeColor;
+    transform: translate3d(0,-2px,0);
   }
-
 
 </style>
 
