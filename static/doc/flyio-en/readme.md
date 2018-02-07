@@ -23,7 +23,7 @@ Supporting request forwarding and Promise based  HTTP client for all  JavaScript
 ## Features
 
 1. Supports the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
-2. Make [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser，**light-weight and very light-weight** 
+2. Make [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser，**light-weight and very light-weight**
 3. Make http requests from node.js
 4. Make http requests from WeChat applet
 5. Supports  request and response interceptors
@@ -45,7 +45,7 @@ Fly positioning is the ultimate solution for Javascript http requests. That is t
 
 You can find the Fly documentation [on the offical website](https://wendux.github.io/dist/#/language).
 
-[中文文档](https://wendux.github.io/dist/#/doc/flyio/readme) 
+[中文文档](https://wendux.github.io/dist/#/doc/flyio/readme)
 
 ## Installing
 
@@ -138,7 +138,7 @@ fly.all([getUserRecords(), getUserProjects()])
 
 ```javascript
 fly.request("/test",{hh:5},{
-    method:"post", 
+    method:"post",
     timeout:5000 // Set timeout to 5 seconds
  })
 .then(d=>{ console.log("request result:",d)})
@@ -258,10 +258,10 @@ If  the request fails, `catch`  will be called;  the error object  is an instanc
   headers:{},
   // `baseURL` will be prepended to `url` unless `url` is absolute.
   // It can be convenient to set `baseURL` for an instance of fly to pass relative URLs
-  // to methods of that instance.   
+  // to methods of that instance.
   baseURL:"",
   // `timeout` specifies the number of milliseconds before the request times out.
-  // If the request takes longer than `timeout`, the request will be aborted.  
+  // If the request takes longer than `timeout`, the request will be aborted.
   timeout:0,  //default
   // `withCredentials` indicates whether or not cross-site Access-Control requests
   // should be made using credentials
@@ -284,7 +284,7 @@ fly.config.timeout=10000;
 fly.config.baseURL="https://wendux.github.io/"
 ```
 
-### Single request 
+### Single request
 
 Single request configuration is valid only once:
 
@@ -341,19 +341,67 @@ This API is suitable for use in RESTful API scenarios. For convenience, the corr
 
 Helper functions for dealing with concurrent requests.
 
-##### `axios.all([])`   
+##### `axios.all([])`
 
 ##### `axios.spread(callback)`
 
 The parameter of all is an array of `promise`,  `then` will be called only when all requests are successful, and` catch` will be called as long as one fails.
 
-## Creating  an instance 
+## Using application/x-www-form-urlencoded format
+
+By default, fly serializes JavaScript objects to `JSON`. To send data in the `application/x-www-form-urlencoded` format instead, you can use one of the following options.
+
+### Browser
+
+In a browser, you can use the [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) API as follows:
+
+```js
+var params = new URLSearchParams();
+params.append('param1', 'value1');
+params.append('param2', 'value2');
+fly.post('/foo', params);
+```
+
+> Note that `URLSearchParams` is not supported by all browsers (see [caniuse.com](http://www.caniuse.com/#feat=urlsearchparams)), but there is a [polyfill](https://github.com/WebReflection/url-search-params) available (make sure to polyfill the global environment).
+
+Alternatively, you can encode data using the [`qs`](https://github.com/ljharb/qs) library:
+
+```js
+var qs = require('qs');
+fly.post('/foo', qs.stringify({ 'bar': 123 }));
+```
+
+### Node.js
+
+In node.js, you can use the [`querystring`](https://nodejs.org/api/querystring.html) module as follows:
+
+```js
+var querystring = require('querystring');
+fly.post('http://something.com/', querystring.stringify({ foo: 'bar' }));
+```
+
+You can also use the [`qs`](https://github.com/ljharb/qs) library.
+
+
+
+## Promises
+
+Fly depends on a native ES6 Promise implementation to be [supported](http://caniuse.com/promises).
+If your environment doesn't support ES6 Promises, you can [polyfill](https://github.com/jakearchibald/es6-promise).
+
+## TypeScript
+fly includes [TypeScript](http://typescriptlang.org) definitions.
+```typescript
+import fly from "flyio"
+fly.get('/user?ID=12345');
+```
+## Creating  an instance
 
 You can create a new instance of Fly , and then apply different configurations:
 
 ```javascript
 // Notice require path is  "flyio/dist/npm/fly"
-var  Fly=require("flyio/dist/npm/fly") 
+var  Fly=require("flyio/dist/npm/fly")
 var nFly=new Fly();
 // Apply different configurations
 nFly.config.timeout=15000
