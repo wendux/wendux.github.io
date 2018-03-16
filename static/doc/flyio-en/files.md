@@ -19,7 +19,8 @@ src is the source code directory，explanation is as follows
 | node                   | **dir** | source code for node，**It won't be packed** |
 | utils                  | **dir** | Some tool function files                 |
 | fly.js                 | file    | the main entry of fly.js                 |
-| wx.js                  | file    | the entry of WeChat applet               |
+| wx.js                  | file    | the entry of WeChat Mini Program         |
+| weex.js                | file    | the entry of weex                        |
 | engine-wrapper.js      | file    | engine-wrapper source code               |
 
 

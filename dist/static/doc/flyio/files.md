@@ -20,6 +20,7 @@ src为源码目录，说明如下
 | utils             | 目录   | 一些工具函数文件                |
 | fly.js            | 文件   | fly.js的主入口              |
 | wx.js             | 文件   | 微信小程序的主入口文件             |
+| weex.js           | 文件   | weex主文件入口               |
 | engine-wrapper.js | 文件   | engine-wrapper入口        |
 
 

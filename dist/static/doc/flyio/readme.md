@@ -2,9 +2,20 @@
 
 ![fly.js](./static/doc/flyio/fly.png)
 <div style="text-align:center; margin-bottom:40px;">
-<div style="overflow:hidden;    display: inline-block;"><div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>  <div style="float:left; margin-left:10px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div>
+<div style="overflow:hidden;    display: inline-block;">
+<div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>  <div style="float:left; margin-left:10px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div> 
+<div style="float:left; margin-left:10px">[![typescript](https://img.shields.io/badge/typeScript-support-orange.svg)](https://github.com/wendux/fly/blob/master/index.d.ts)</div>
+<div style="float:left; margin-left:10px">[![size](https://img.shields.io/github/size/wendux/fly/dist/fly.min.js.svg)](https://unpkg.com/flyio@0.3.1/dist/fly.min.js)</div>
+<div style="float:left; margin-left:10px">[![dependency](https://img.shields.io/badge/dependency-Promise-yellowgreen.svg)](https://github.com/stefanpenner/es6-promise)</div>
+<div style="float:left; margin-left:10px">![platform](https://img.shields.io/badge/platform-Browser%7CNode%7CWechat--Mini--Program%7CWeex-blue.svg)</div>
 </div>
 </div>
+
+## Fly.js
+
+一个支持所有JavaScript运行环境的基于Promise的http请求库。
+
+### 浏览器支持
 
 | ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
@@ -16,19 +27,40 @@
 
 </style>
 
+### 其它支持的平台
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="middle">
+         <img height="100"  src="https://nodejs.org/static/images/logo-light.svg" alt="node logo">
+     </td>
+    <td align="center" valign="middle">
+        <img height="100" src="https://github.com/wendux/fly/raw/master/imgs/wxmp.png" alt="Vue logo"> 
+    </td>
+   <td align="center" valign="middle">
+      <img height="100"  src="http://img.alicdn.com/tps/TB1zBLaPXXXXXXeXXXXXXXXXXXX-121-59.svg" alt="mpvue logo">
+    </td>
+  </tr>
+ </tbody>
+</table>
+
+目前Fly.js支持的平台包括：[Node.js](https://nodejs.org/) 、[微信小程序](https://mp.weixin.qq.com/cgi-bin/wx) 、[Weex](http://weex.apache.org/) 和浏览器，这些平台的 JavaScript 运行时都是不同的。更多的平台正在持续添加中，请保持关注。
+
 ## 简介
 
-Fly.js 是一个基于 promise 的，轻量且强大的 Javascript http 网络库，它有如下特点：
+Fly.js 是一个基于 promise 的，轻量且强大的Javascript http 网络库，它有如下特点：
 
 1. 提供统一的 Promise API。
 2. 支持浏览器环境，**轻量且非常轻量** 。
-3. 支持 Node 环境。
-4. 支持请求／响应拦截器。
-5. 自动转换 JSON 数据。
-6. **支持切换底层 Http Engine，可轻松适配各种运行环境**。
-7. **浏览器端支持全局Ajax拦截 。**
-8. **H5页面内嵌到原生 APP 中时，支持将 http 请求转发到 Native。支持直接请求图片**。
-9. **高度可定制、可拆卸、可拼装。**
+3. 支持 [Node 环境](https://nodejs.org/)。
+4. 支持 [微信小程序](https://mp.weixin.qq.com/cgi-bin/wx)。
+5. 支持 [Weex](http://weex.apache.org/) 。
+6. 支持请求／响应拦截器。
+7. 自动转换 JSON 数据。
+8. **支持切换底层 Http Engine，可轻松适配各种运行环境**。
+9. **浏览器端支持全局Ajax拦截 。**
+10. **H5页面内嵌到原生 APP 中时，支持将 http 请求转发到 Native。支持直接请求图片**。
+11. **高度可定制、可拆卸、可拼装。**
 
 
 
@@ -218,13 +250,6 @@ fly.interceptors.response.use(null,null)
 ```
 
 
-
-## Node
-
-无论是在浏览器环境，还是在 Node 环境，Fly在上层提供了统一的 Promise API。这意味着无论您是 web 开发还是 node 开发，您都可以以相同的调用方式来发起http请求。不过，由于node和浏览器环境本身的差异，在Node环境下，Fly除了支持基本的API之外，还提供了一些增强的API，这些 API 主要涉及文件下载、多文件上传、http代理等众多强大的功能，详情请参考 [Node 下增强的API ](#/doc/flyio/node)
-
-
-
 ## 错误处理
 
 请求失败之后，`catch` 捕获到的 err 为 Error 的一个实例，err有两个字段:
@@ -410,17 +435,34 @@ Fly 引入了Http Engine 的概念，所谓 Http Engine，就是真正发起 htt
 
 在浏览器中，可以通过用 Fly  engine 替换 `XMLHttpRequest` 的方式拦截**全局**的的 Ajax 请求，无论上层使用的是何种网络库。
 
+## Node
+
+无论是在浏览器环境，还是在 Node 环境，Fly在上层提供了统一的 Promise API。这意味着无论您是 web 开发还是 node 开发，您都可以以相同的调用方式来发起http请求。不过，由于node和浏览器环境本身的差异，在Node环境下，Fly除了支持基本的API之外，还提供了一些增强的API，这些 API 主要涉及文件下载、多文件上传、http代理等众多强大的功能，详情请参考 [Node 下增强的API ](#/doc/flyio/node)
+
 
 ## 微信小程序支持
 
 微信小程序的js运行环境(js core)和浏览器的不同，为了方便小程序开发者也能方便的使用Fly，官方提供了微信小程序的 adapter,  现在，您可以在微信小程序中方便的使用fly了。集成文档参考：[在微信小程序中使用fly](https://wendux.github.io/dist/#/doc/flyio/wx) 。
+
+## Weex支持
+
+在weex应用程序中使用，你需要引入 “flyio/dist/npm/weex.js”
+
+```javascript
+var  Fly=require("flyio/dist/npm/weex")
+var fly=new Fly
+fly.get('/user?ID=12345')
+```
+## 工程目录结构
+
+工程目录结构及文件说明请参照  [fly源码目录说明](https://wendux.github.io/dist/#/doc/flyio/files) 。
 
 ## 体积
 
 在浏览器环境下，一个库的大小是非常重要的。这方面 Fly 做的很好，它在保持强大的功能的同时，将自己的身材控制到了最好。min 只有 4.6K 左右，GZIP 压缩后不到 2K，体积是 axios 的四分之一。
 
 
-## Finally
+## 最后
 
 如果感觉 Fly 对您有用，欢迎 star 。
 

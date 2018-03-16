@@ -1,10 +1,22 @@
 
-
 ![fly.js](./static/doc/flyio/fly.png)
 <div style="text-align:center; margin-bottom:40px;">
-<div style="overflow:hidden;    display: inline-block;"><div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>  <div style="float:left; margin-left:10px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div>
+<div style="overflow:hidden;    display: inline-block;">
+<div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>  <div style="float:left; margin-left:10px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div>
+<div style="float:left; margin-left:10px">[![typescript](https://img.shields.io/badge/typeScript-support-orange.svg)](https://github.com/wendux/fly/blob/master/index.d.ts)</div>
+<div style="float:left; margin-left:10px">[![size](https://img.shields.io/github/size/wendux/fly/dist/fly.min.js.svg)](https://unpkg.com/flyio@0.3.1/dist/fly.min.js)</div>
+<div style="float:left; margin-left:10px">[![dependency](https://img.shields.io/badge/dependency-Promise-yellowgreen.svg)](https://github.com/stefanpenner/es6-promise)</div>
+<div style="float:left; margin-left:10px">![platform](https://img.shields.io/badge/platform-Browser%7CNode%7CWechat--Mini--Program%7CWeex-blue.svg)</div>
 </div>
 </div>
+
+## Fly.js
+
+Supporting request forwarding and Promise based HTTP client for all JavaScript runtimes.
+
+Chinese documentation : [中文文档](https://github.com/wendux/fly/blob/master/README-CH.md)
+
+### Browser Support
 
 | ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) |
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
@@ -16,22 +28,38 @@
 
 </style>
 
-## Fly
+### Other Platforms  Support
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="middle">
+         <img height="100"  src="https://nodejs.org/static/images/logo-light.svg" alt="node logo">
+     </td>
+    <td align="center" valign="middle">
+        <img height="100" src="https://github.com/wendux/fly/raw/master/imgs/wxmp.png" alt="Vue logo">
+    </td>
+   <td align="center" valign="middle">
+      <img height="100"  src="http://img.alicdn.com/tps/TB1zBLaPXXXXXXeXXXXXXXXXXXX-121-59.svg" alt="mpvue logo">
+    </td>
+  </tr>
+ </tbody>
+</table>
 
-Supporting request forwarding and Promise based  HTTP client for all  JavaScript runtimes.
+Currently the platforms that fly.js supported include  [Node.js](https://nodejs.org/) 、[WeChat Mini Program](https://mp.weixin.qq.com/cgi-bin/wx) 、[Weex](http://weex.apache.org/) and browers, all  JavaScript runtimes of these are different. More platforms  are supporting...
 
 ## Features
 
 1. Supports the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
 2. Make [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser，**light-weight and very light-weight**
-3. Make http requests from node.js
-4. Make http requests from WeChat applet
-5. Supports  request and response interceptors
-6. Automatic transforms for JSON data
-7. Supports switching the underlying Http Engine, easy to adapt to various JavaScript Runtime.
-8. Supports global Ajax interception on browser
-9. Supports  request forwarding in hybrid applications
-10. Easy to customize, disassemble and assemble
+3. Make http requests from [Node.js](https://nodejs.org/)
+4. Make http requests from [WeChat Mini Program](https://mp.weixin.qq.com/cgi-bin/wx)
+5. Make http requests from [Weex](http://weex.apache.org/)
+6. Supports  request and response interceptors。
+7. Automatic transforms for JSON data。
+8. Supports switching the underlying Http Engine, easy to adapt to various JavaScript Runtime.
+9. Supports global Ajax interception on browser
+10. Supports request forwarding in hybrid applications
+11. Easy to customize, disassemble and assemble
 
 
 
@@ -55,23 +83,22 @@ You can find the Fly documentation [on the offical website](https://wendux.githu
 npm install flyio
 ```
 
-### Using CDN
+### Using CDN （on browsers）
 
 ```javascript
 <script src="https://unpkg.com/flyio/dist/fly.min.js"></script>
 ```
 
-### UMD
+### UMD （on browsers）
 
 ```http
 https://unpkg.com/flyio/dist/umd/fly.umd.min.js
 ```
 
 
-
 ## Example
 
-The following example, if not specified, can be executed in both browsers and node runtimes.
+The following example, if not specified, can be executed in all javaScript runtimes.
 
 ### Performing a `GET` request
 
@@ -419,18 +446,33 @@ Fly introduces the concept of Http Engine, and Http Engine is the engine that re
 In browsers, you can intercept global Ajax requests by replacing XMLHttpRequest with Fly engine, regardless of what network library the upper layer uses.  More details click here [Ajax hook](https://wendux.github.io/dist/#/doc/flyio-en/hook)
 
 
-## Use in WeChat applet
+## Use in WeChat Mini Program
 
-The JavaScript runtime of   WeChat applets  is different from browser and node.  you can easily use fly in WeChat applet, More details click here  [Using fly in WeChat applet ](https://wendux.github.io/dist/#/doc/flyio-en/wx) .
+The JavaScript runtime of   WeChat Mini Programs  is different from browser and node.  you can easily use fly in WeChat Mini Program, More details click here  [Using fly in WeChat Mini Program ](https://wendux.github.io/dist/#/doc/flyio-en/wx) .
+
+## Using in Weex
+
+The  JavaScript runtime of  [Weex](http://weex.apache.org/)  is  different from browser and node.  you can also easily use fly in WeChat [Weex](http://weex.apache.org/)  application:
+
+```js
+// require "flyio/dist/npm/weex" instead
+var  Fly=require("flyio/dist/npm/weex")
+var fly=new Fly
+fly.get('/user?ID=12345')
+```
 
 ## Size
 
 In  browser environment, the size of a library is very important. In this regard, Fly is doing a good job, on the on hand  Fly maintains the powerful function, on the other hand, Fly control its body to the minimum. Min is only about 4.6K, and GZIP is less than 2K after compression, and the volume is 1/4 of Axios。
 
+## Project structure
+
+Learn the project structure of Fly.js please refer to : [Fly.js source structure](https://wendux.github.io/dist/#/doc/flyio-en/files)
+
 
 ## Finally
 
-Welcome star 。
+Welcome stars。
 
 
 

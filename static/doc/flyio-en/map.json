@@ -39,7 +39,7 @@
           "file": "hook"
         },
         {
-          "title": "Using in WeChat applet",
+          "title": "Using in WeChat Mini Program",
           "file": "wx"
         },
         {
