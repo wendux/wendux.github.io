@@ -3,7 +3,7 @@
 ![fly.js](./static/doc/flyio/fly.png)
 <div style="text-align:center; margin-bottom:40px;">
 <div style="overflow:hidden;    display: inline-block;">
-<div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>  <div style="float:left; margin-left:10px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div> 
+<div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>  <div style="float:left; margin-left:10px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div>
 <div style="float:left; margin-left:10px">[![typescript](https://img.shields.io/badge/typeScript-support-orange.svg)](https://github.com/wendux/fly/blob/master/index.d.ts)</div>
 <div style="float:left; margin-left:10px">[![size](https://img.shields.io/github/size/wendux/fly/dist/fly.min.js.svg)](https://unpkg.com/flyio@0.3.1/dist/fly.min.js)</div>
 <div style="float:left; margin-left:10px">[![dependency](https://img.shields.io/badge/dependency-Promise-yellowgreen.svg)](https://github.com/stefanpenner/es6-promise)</div>
@@ -35,7 +35,7 @@
          <img height="100"  src="https://nodejs.org/static/images/logo-light.svg" alt="node logo">
      </td>
     <td align="center" valign="middle">
-        <img height="100" src="https://github.com/wendux/fly/raw/master/imgs/wxmp.png" alt="Vue logo"> 
+        <img height="100" src="https://github.com/wendux/fly/raw/master/imgs/wxmp.png" alt="Vue logo">
     </td>
    <td align="center" valign="middle">
       <img height="100"  src="http://img.alicdn.com/tps/TB1zBLaPXXXXXXeXXXXXXXXXXXX-121-59.svg" alt="mpvue logo">
@@ -230,7 +230,7 @@ fly.interceptors.request.use((request)=>{
   	//var err=new Error("xxx")
   	//err.request=request
   	//return Promise.reject(new Error(""))
-  
+
     //可以显式返回request, 也可以不返回，没有返回值时拦截器中默认返回request
     return request;
 })
@@ -273,20 +273,6 @@ fly.interceptors.response.use(
 }
 ```
 
-### 拦截器中执行异步任务
-
-拦截器中可以返回修改后的数据，也可以返回一个`Promise`对象，这样就可以在拦截器中支持异步任务：
-
-```javascript
-//网络请求延迟两秒后发送
-fly.interceptors.request.use((request)=>{
-  return new Promise((resolve,reject)=>{
-    setTimeout(()=>{
-      resolve(request)
-    },2000)
-  })
-})
-```
 
 ### 移除拦截器
 
