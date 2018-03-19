@@ -13,7 +13,7 @@
 
 ## Fly.js
 
-一个支持所有JavaScript运行环境的基于Promise的http请求库。
+一个支持所有JavaScript运行环境的基于Promise的、支持请求转发、强大的http请求库。可以让您在多个端上尽可能大限度的实现代码复用。
 
 ### 浏览器支持
 
@@ -221,26 +221,74 @@ Fly支持请求／响应拦截器，可以通过它在请求发起之前和收�
 ```javascript
 
 //添加请求拦截器
-fly.interceptors.request.use((config,promise)=>{
+fly.interceptors.request.use((request)=>{
     //给所有请求添加自定义header
-    config.headers["X-Tag"]="flyio";
-    //可以通过promise.reject／resolve直接中止请求
-    //promise.resolve("fake data")
-    return config;
+    request.headers["X-Tag"]="flyio";
+  	//打印出请求体
+  	console.log(request.body)
+  	//终止请求
+  	//var err=new Error("xxx")
+  	//err.request=request
+  	//return Promise.reject(new Error(""))
+  
+    //可以显式返回request, 也可以不返回，没有返回值时拦截器中默认返回request
+    return request;
 })
 
 //添加响应拦截器，响应拦截器会在then/catch处理之前执行
 fly.interceptors.response.use(
-    (response,promise) => {
+    (response) => {
         //只将请求结果的data字段返回
         return response.data
     },
-    (err,promise) => {
+    (err) => {
         //发生网络错误后会走到这里
-        //promise.resolve("ssss")
+        //return Promise.resolve("ssss")
     }
 )
 ```
+
+**请求拦截器**中的request对象结构如下：
+
+```javascript
+{
+  baseURL,  //请求的基地址
+  body, //请求的参数
+  headers, //自定义的请求头
+  method, // 请求方法
+  timeout, //本次请求的超时时间
+  url, // 本次请求的地址
+  withCredentials //跨域请求是否发送第三方cookie
+}
+```
+
+**响应拦截器**中的response对象结构如下：
+
+```javascript
+{
+  data, //服务器返回的数据
+  engine, //请求使用的http engine(见下面文档),浏览器中为本次请求的XMLHttpRequest对象
+  headers, //响应头信息
+  request  //本次响应对应的请求信息
+}
+```
+
+### 拦截器中执行异步任务
+
+拦截器中可以返回修改后的数据，也可以返回一个`Promise`对象，这样就可以在拦截器中支持异步任务：
+
+```javascript
+//网络请求延迟两秒后发送
+fly.interceptors.request.use((request)=>{
+  return new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      resolve(request)
+    },2000)
+  })
+})
+```
+
+### 移除拦截器
 
 如果你想移除拦截器，只需要将拦截器设为null即可：
 
@@ -250,6 +298,7 @@ fly.interceptors.response.use(null,null)
 ```
 
 
+
 ## 错误处理
 
 请求失败之后，`catch` 捕获到的 err 为 Error 的一个实例，err有两个字段:
@@ -257,7 +306,8 @@ fly.interceptors.response.use(null,null)
 ```javascript
 {
   message:"Not Find 404", //错误消息
-  status:404 //如果服务器可通，则为http请求状态码。网络异常时为0，网络超时为1
+  status:404, //如果服务器可通，则为http请求状态码。网络异常时为0，网络超时为1
+  request:{...} //请求信息
 }
 ```
 

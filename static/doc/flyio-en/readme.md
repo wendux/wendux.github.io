@@ -216,27 +216,69 @@ You can intercept requests or responses before they are handled by `then` or `ca
 ```javascript
 
 // Add a request interceptor
-fly.interceptors.request.use((config,promise)=>{
+fly.interceptors.request.use((request)=>{
     // Do something before request is sent
-    config.headers["X-Tag"]="flyio";
+    request.headers["X-Tag"]="flyio";
+  	console.log(request.body)
     // Complete the request with custom data
-    // promise.resolve("fake data")
-    return config;
+    // return Promise.resolve("fake data")
 })
 
 // Add a response interceptor
 fly.interceptors.response.use(
-    (response,promise) => {
-        // Do something with response data .
-        // Just return the data field of response
-        return response.data
+    (response) => {
+      // Do something with response data .
+      // Just return the data field of response
+      return response.data
     },
-    (err,promise) => {
+    (err) => {
       // Do something with response error
-        //promise.resolve("ssss")
+      //return Promise.resolve("ssss")
     }
 )
 ```
+
+The structures of the `request ` object in request interceptor.
+
+```javascript
+{
+  baseURL,  //base url
+  body, // request parameters
+  headers, //custom request headers
+  method, // http request method
+  timeout, // request time
+  url, // request url (or relative path)
+  withCredentials // determine whether sending thirdparty cookies in cross-domain request
+}
+```
+
+The structures of the `response` object in response interceptor.
+
+```javascript
+{
+  data, //response data
+  engine, //http engine,In browser,it's a instance of XMLHttpRequest.
+  headers, //response headers
+  request  //the origin request object
+}
+```
+
+### Perform async task in interceptor
+
+You can also return a Promise object  in interceptor, so you can perform a async task in interceptor:
+
+```javascript
+//Delay two seconds to perform network requests
+fly.interceptors.request.use((request)=>{
+  return new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      resolve(request)
+    },2000)
+  })
+})
+```
+
+### Remove interceptor 
 
 If you may need to remove an interceptor later,    just set it to null.
 
@@ -260,7 +302,8 @@ If  the request fails, `catch`  will be called;  the error object  is an instanc
 ```javascript
 {
   message:"Not Find 404", //error description
-  status:404 // error code
+  status:404, // error code
+  request:{...} //the request info
 }
 ```
 
@@ -309,6 +352,8 @@ fly.config.headers={xx:5,bb:6,dd:7}
 fly.config.timeout=10000;
 // Set base url
 fly.config.baseURL="https://wendux.github.io/"
+// Set common header
+fly.config.headers["xx"]="xx"
 ```
 
 ### Single request
