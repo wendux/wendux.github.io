@@ -288,8 +288,9 @@ If  the request fails, `catch`  will be called;  the error object  is an instanc
 ```javascript
 {
   message:"Not Find 404", //error description
+  engine:{...}, //http engine,In browser,it's a instance of XMLHttpRequest.
   status:404, // error code
-  request:{...} //the request info
+  request:{...}, //the request info
 }
 ```
 
