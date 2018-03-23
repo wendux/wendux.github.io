@@ -1,8 +1,9 @@
 
 ![fly.js](./static/doc/flyio/fly.png)
 <div style="text-align:center; margin-bottom:40px;">
-<div style="overflow:hidden;    display: inline-block;">
-<div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>  <div style="float:left; margin-left:10px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div>
+<div style="overflow:hidden; display: inline-block;">
+<div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>
+<div style="float:left; margin-left:10px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div>
 <div style="float:left; margin-left:10px">[![typescript](https://img.shields.io/badge/typeScript-support-orange.svg)](https://github.com/wendux/fly/blob/master/index.d.ts)</div>
 <div style="float:left; margin-left:10px">[![size](https://img.shields.io/github/size/wendux/fly/dist/fly.min.js.svg)](https://unpkg.com/flyio@0.3.1/dist/fly.min.js)</div>
 <div style="float:left; margin-left:10px">[![dependency](https://img.shields.io/badge/dependency-Promise-yellowgreen.svg)](https://github.com/stefanpenner/es6-promise)</div>
@@ -22,14 +23,9 @@ Chinese documentation : [中文文档](https://github.com/wendux/fly/blob/master
 | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | ✔                                        | ✔                                        | ✔                                        | ✔                                        | ✔                                        | > 8                                      |
 
-<style>
-
- table:first-of-type{margin: 20px auto !important;}
-
-</style>
 
 ### Other Platforms  Support
-<table>
+<table style="background:white">
     <tbody>
     <tr>
         <td align="center" valign="middle">
