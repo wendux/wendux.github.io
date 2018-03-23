@@ -1,15 +1,5 @@
 
 ![fly.js](./static/doc/flyio/fly.png)
-<div style="text-align:center; margin-bottom:40px;">
-<div style="overflow:hidden; display: inline-block;">
-<div style="float:left">[![npm version](https://img.shields.io/npm/v/flyio.svg)](https://www.npmjs.org/package/flyio)</div>
-<div style="float:left; margin-left:10px">[![build status](https://travis-ci.org/wendux/fly.svg)](https://travis-ci.org/wendux/fly)</div>
-<div style="float:left; margin-left:10px">[![typescript](https://img.shields.io/badge/typeScript-support-orange.svg)](https://github.com/wendux/fly/blob/master/index.d.ts)</div>
-<div style="float:left; margin-left:10px">[![size](https://img.shields.io/github/size/wendux/fly/dist/fly.min.js.svg)](https://unpkg.com/flyio@0.3.1/dist/fly.min.js)</div>
-<div style="float:left; margin-left:10px">[![dependency](https://img.shields.io/badge/dependency-Promise-yellowgreen.svg)](https://github.com/stefanpenner/es6-promise)</div>
-<div style="float:left; margin-left:10px">![platform](https://img.shields.io/badge/platforms-All%20JavaScript%20Runtimes-blue.svg)</div>
-</div>
-</div>
 
 ## Fly.js
 
@@ -25,37 +15,6 @@ Chinese documentation : [中文文档](https://github.com/wendux/fly/blob/master
 
 ### Other Platforms  Support
 
-<table style="background:white">
-    <tbody>
-    <tr>
-        <td align="center" valign="middle">
-            <a href="https://nodejs.org/">
-                <img  src="https://github.com/wendux/fly/raw/master/imgs/node.png" alt="node logo">
-            </a>
-        </td>
-        <td align="center" valign="middle">
-            <a href="https://mp.weixin.qq.com/">
-                <img  src="https://github.com/wendux/fly/raw/master/imgs/mp.png" alt="Mini Program logo">
-            </a>
-        </td>
-        <td align="center" valign="middle">
-            <a href="http://facebook.github.io/react-native/">
-                <img  src="https://github.com/wendux/fly/raw/master/imgs/rn.png" alt="mpvue logo">
-            </a>
-        </td>
-        <td align="center" valign="middle">
-            <a href="http://weex.apache.org/">
-                <img  src="https://github.com/wendux/fly/raw/master/imgs/weex.png" alt="weex logo">
-            </a>
-        </td>
-        <td align="center" valign="middle">
-            <a href="https://www.quickapp.cn/">
-                <img  src="https://github.com/wendux/fly/raw/master/imgs/hp.png" alt="quick app logo">
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
 
 Currently the platforms that fly.js supported include  [Node.js](https://nodejs.org/) 、[WeChat Mini Program](https://mp.weixin.qq.com/cgi-bin/wx) 、[Weex](http://weex.apache.org/) 、[React Native](http://facebook.github.io/react-native/) 、[Quick App](https://www.quickapp.cn/) and the browers, all  JavaScript runtimes of these are different. More platforms  are supporting...
 
