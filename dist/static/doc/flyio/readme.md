@@ -7,7 +7,7 @@
 <div style="float:left; margin-left:10px">[![typescript](https://img.shields.io/badge/typeScript-support-orange.svg)](https://github.com/wendux/fly/blob/master/index.d.ts)</div>
 <div style="float:left; margin-left:10px">[![size](https://img.shields.io/github/size/wendux/fly/dist/fly.min.js.svg)](https://unpkg.com/flyio@0.3.1/dist/fly.min.js)</div>
 <div style="float:left; margin-left:10px">[![dependency](https://img.shields.io/badge/dependency-Promise-yellowgreen.svg)](https://github.com/stefanpenner/es6-promise)</div>
-<div style="float:left; margin-left:10px">![platform](https://img.shields.io/badge/platform-Browser%7CNode%7CWechat--Mini--Program%7CWeex-blue.svg)</div>
+<div style="float:left; margin-left:10px">![platform](https://img.shields.io/badge/platforms-All%20JavaScript%20Runtimes-blue.svg)</div>
 </div>
 </div>
 
@@ -29,38 +29,52 @@
 
 ### 其它支持的平台
 <table>
-  <tbody>
+    <tbody>
     <tr>
-      <td align="center" valign="middle">
-         <img height="100"  src="https://nodejs.org/static/images/logo-light.svg" alt="node logo">
-     </td>
-    <td align="center" valign="middle">
-        <img height="100" src="https://github.com/wendux/fly/raw/master/imgs/wxmp.png" alt="Vue logo">
-    </td>
-   <td align="center" valign="middle">
-      <img height="100"  src="http://img.alicdn.com/tps/TB1zBLaPXXXXXXeXXXXXXXXXXXX-121-59.svg" alt="mpvue logo">
-    </td>
-  </tr>
- </tbody>
+        <td align="center" valign="middle">
+            <a href="https://nodejs.org/">
+                <img  src="https://github.com/wendux/fly/raw/master/imgs/node.png" alt="node logo">
+            </a>
+        </td>
+        <td align="center" valign="middle">
+            <a href="https://mp.weixin.qq.com/">
+                <img  src="https://github.com/wendux/fly/raw/master/imgs/mp.png" alt="Mini Program logo">
+            </a>
+        </td>
+        <td align="center" valign="middle">
+            <a href="http://facebook.github.io/react-native/">
+                <img  src="https://github.com/wendux/fly/raw/master/imgs/rn.png" alt="mpvue logo">
+            </a>
+        </td>
+        <td align="center" valign="middle">
+            <a href="http://weex.apache.org/">
+                <img  src="https://github.com/wendux/fly/raw/master/imgs/weex.png" alt="weex logo">
+            </a>
+        </td>
+        <td align="center" valign="middle">
+            <a href="https://www.quickapp.cn/">
+                <img  src="https://github.com/wendux/fly/raw/master/imgs/hp.png" alt="quick app logo">
+            </a>
+        </td>
+    </tr>
+    </tbody>
 </table>
 
-目前Fly.js支持的平台包括：[Node.js](https://nodejs.org/) 、[微信小程序](https://mp.weixin.qq.com/cgi-bin/wx) 、[Weex](http://weex.apache.org/) 和浏览器，这些平台的 JavaScript 运行时都是不同的。更多的平台正在持续添加中，请保持关注。
+目前Fly.js支持的平台包括：[Node.js](https://nodejs.org/) 、[微信小程序](https://mp.weixin.qq.com/cgi-bin/wx) 、[Weex](http://weex.apache.org/) 、[React Native](http://facebook.github.io/react-native/) 、[Quick App](https://www.quickapp.cn/) 和浏览器，这些平台的 JavaScript 运行时都是不同的。更多的平台正在持续添加中，请保持关注。
 
 ## 简介
 
 Fly.js 是一个基于 promise 的，轻量且强大的Javascript http 网络库，它有如下特点：
 
 1. 提供统一的 Promise API。
-2. 支持浏览器环境，**轻量且非常轻量** 。
-3. 支持 [Node 环境](https://nodejs.org/)。
-4. 支持 [微信小程序](https://mp.weixin.qq.com/cgi-bin/wx)。
-5. 支持 [Weex](http://weex.apache.org/) 。
-6. 支持请求／响应拦截器。
-7. 自动转换 JSON 数据。
-8. **支持切换底层 Http Engine，可轻松适配各种运行环境**。
-9. **浏览器端支持全局Ajax拦截 。**
-10. **H5页面内嵌到原生 APP 中时，支持将 http 请求转发到 Native。支持直接请求图片**。
-11. **高度可定制、可拆卸、可拼装。**
+2. 浏览器环境下，**轻量且非常轻量** 。
+3. 支持多种JavaScript 运行环境
+4. 支持请求／响应拦截器。
+5. 自动转换 JSON 数据。
+6. **支持切换底层 Http Engine，可轻松适配各种运行环境**。
+7. **浏览器端支持全局Ajax拦截 。**
+8. **H5页面内嵌到原生 APP 中时，支持将 http 请求转发到 Native。支持直接请求图片**。
+
 
 
 
@@ -490,6 +504,33 @@ var  Fly=require("flyio/dist/npm/weex")
 var fly=new Fly
 fly.get('/user?ID=12345')
 ```
+
+## 快应用支持
+
+在 [快应用](https://www.quickapp.cn/) 中使用，快应用中依赖 `fetch`模块，需要先在 `manifest.json`中添加引用：
+
+```javascript
+  "features": [
+     ...
+    {"name": "system.fetch"}
+  ]
+```
+
+然后创建fly实例
+
+```javascript
+ //依赖快应用中的fetch模块，需要在
+ var fetch = require("@system.fetch")
+ var Fly=require("flyio/dist/npm/hap")
+ var fly=new Fly(fetch)
+ ...
+ fly.get('test').then(...)
+```
+
+## React Native支持
+
+由于 React Native JavaScript 运行时中存在 `XmlHttpRequest`对象，所以使用方式和浏览器中相同。
+
 ## 工程目录结构
 
 工程目录结构及文件说明请参照  [fly源码目录说明](https://wendux.github.io/dist/#/doc/flyio/files) 。
