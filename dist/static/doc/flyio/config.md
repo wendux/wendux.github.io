@@ -30,6 +30,8 @@ fly.request("/test",null,{ timeout:5000})
   method:"",//请求方法， GET 、POST ...
   headers:{},//请求头
   baseURL:"",//请求基地址
+  //是否自动将Content-Type为“application/json”的响应数据转化为JSON对象，默认为true
+  parseJson:true,
   timeout:""//超时时间
 }
 ```

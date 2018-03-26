@@ -295,6 +295,8 @@ fly.interceptors.response.use(null,null)
   headers:{}, //http请求头，
   baseURL:"", //请求基地址
   timeout:0,//超时时间，为0时则无超时限制
+  //是否自动将Content-Type为“application/json”的响应数据转化为JSON对象，默认为true
+  parseJson:true,
   withCredentials:false //跨域时是否发送cookie
 }
 ```
@@ -316,7 +318,7 @@ fly.config.baseURL="https://wendux.github.io/"
 
 ### 单次请求配置
 
-需要对单次请求配置时，需使用`request`方法，配置只对当次请求有效。
+需要对单次请求配置时，配置只对当次请求有效。
 
 ```javascript
 fly.request("/test",{hh:5},{

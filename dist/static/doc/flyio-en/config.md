@@ -33,11 +33,14 @@ Configurable items are divided into **general fields** and **custom fields**. Th
   headers:{},
   // `baseURL` will be prepended to `url` unless `url` is absolute.
   // It can be convenient to set `baseURL` for an instance of fly to pass relative URLs
-  // to methods of that instance.   
+  // to methods of that instance.
   baseURL:"",
   // `timeout` specifies the number of milliseconds before the request times out.
-  // If the request takes longer than `timeout`, the request will be aborted.  
+  // If the request takes longer than `timeout`, the request will be aborted.
   timeout:0,  //default
+  // `parseJson` indicates whether or not it is  automatically converted response
+  //  data , the Content-Type of which is application/json, to JSON object,
+  parseJson:true,
   // `withCredentials` indicates whether or not cross-site Access-Control requests
   // should be made using credentials
   withCredentials: false, // default
