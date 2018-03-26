@@ -4,14 +4,21 @@
 
 
 ### 下载
-https://github.com/wendux/fly/tree/master/dist/npm/wx.js 
-https://github.com/wendux/fly/tree/master/dist/umd/wx.umd.min.js 
+https://github.com/wendux/fly/tree/master/dist/npm/wx.js
+https://github.com/wendux/fly/tree/master/dist/umd/wx.umd.min.js
 下载任意一个, 然后将其拷贝到您的工程目录下。
+
+如果你使用 [mpvue](https://github.com/Meituan-Dianping/mpvue), 你仍然可以使用 npm 来管理依赖.
+
+```javascript
+  npm install flyio
+```
 
 ### 使用
 
 ```javascript
-var Fly=require("../lib/wx.js") //wx.js为您下载的源码文件
+var Fly=require("../lib/wx") //wx.js为您下载的源码文件
+// var Fly=require("flyio/dist/npm/wx") //npm引入方式
 var fly=new Fly(); //创建fly实例
 
 //添加拦截器

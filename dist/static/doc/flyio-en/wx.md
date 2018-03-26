@@ -9,10 +9,17 @@ https://github.com/wendux/fly/tree/master/dist/umd/wx.umd.min.js
 
 Download any one and copy it to your project directory。
 
+If you use [mpvue](https://github.com/Meituan-Dianping/mpvue), you can also use npm to manage dependencies.
+
+```javascript
+  npm install flyio
+```
+
 ### Using
 
 ```javascript
-var Fly=require("../lib/wx.js") //wx.js is your downloaded code
+var Fly=require("../lib/wx") //wx.js is your downloaded code
+// var Fly=require("flyio/dist/npm/wx") //npm require
 var fly=new Fly(); //Create an instance of Fly
 
 // Add interceptors
