@@ -45,36 +45,90 @@ You can find the Fly documentation [on the offical website](https://wendux.githu
 
 ## Installing
 
-### Using npm
+Using npm
 
 ```shell
 npm install flyio
 ```
 
-### Using CDN （on browsers）
+Using CDN （on browsers）
 
 ```javascript
 <script src="https://unpkg.com/flyio/dist/fly.min.js"></script>
 ```
 
-### UMD （on browsers）
+UMD （on browsers）
 
 ```http
 https://unpkg.com/flyio/dist/umd/fly.umd.min.js
 ```
 
-
-## Example
-
-### Require flyio
+## Require flyio
 
 The entry files of  different JavaScript Runtimes may be different, you can refer on the below，
-but the entries of  Browsers, Node, and React Native are the same:
+but the entries of  Browsers, Node, and React Native are the same。each requirement  ways  of these platforms are as follows:
 
-```javascript
-//for Browsers, Node, and React Native
-var fly=require("flyio")
-```
+1. Requiring On browsers、Node、React Native
+
+   ```javascript
+   //for Browsers, Node, and React Native
+   var fly=require("flyio")
+   ```
+
+   The above method requires the default instance of Fly, and you can also create an Fly instance by yourself:
+
+   ```javascript
+   // for browsers and React Native
+   var Fly=require("flyio/dist/npm/fly")
+   // for Node
+   //var Fly=require("flyio/src/node")
+   var fly=new Fly;
+   ```
+
+2. Requiring on WeChat Mini Program
+
+   ```javascript
+   var Fly=require("flyio/dist/npm/wx")
+   var fly=new Fly
+   ```
+
+   If your  project does not use NPM to manage dependencies, you can download the source code directly to your project 。The download links are [wx.js](https://github.com/wendux/fly/tree/master/dist/npm/wx.js) or  [wx.umd.min.js](https://github.com/wendux/fly/tree/master/dist/umd/wx.umd.min.js)  . Download any one, save it to your project directory (assuming named "lib") , and then requiring:
+
+   ```javascript
+   var Fly=require("../lib/wx")
+   var fly=new Fly;
+   ```
+
+3. Requiring on Quick App
+
+   On [Quick App](https://www.quickapp.cn/), Fly relies on the `fetch` module, which needs to be defined in the manifest.json first:
+
+   ```java
+     "features": [
+        ...
+       {"name": "system.fetch"}
+     ]
+   ```
+
+   And then create Fly instance:
+
+   ```javascript
+    var fetch = require("@system.fetch")
+    var Fly=require("flyio/dist/npm/hap")
+    var fly=new Fly(fetch)
+   ```
+
+4. Requiring on Weex
+
+   ```javascript
+   var Fly=require("flyio/dist/npm/weex")
+   var fly=new Fly
+   ```
+
+After the requirement, you can make the global configuration and add the interceptor to `fly` , and peform network request with `fly`.
+
+
+## Example
 
 The following example, if not specified, can be executed in all javaScript runtimes.
 
@@ -458,36 +512,6 @@ Fly introduces the concept of Http Engine, and Http Engine is the engine that re
 
 In browsers, you can intercept global Ajax requests by replacing XMLHttpRequest with Fly engine, regardless of what network library the upper layer uses.  More details click here [Ajax hook](https://wendux.github.io/dist/#/doc/flyio-en/hook)
 
-
-## Use in WeChat Mini Program
-
-The JavaScript runtime of   WeChat Mini Programs  is different from browser and node.  you can easily use fly in WeChat Mini Program, More details click here  [Using fly in WeChat Mini Program ](https://wendux.github.io/dist/#/doc/flyio-en/wx) .
-
-## Using in Weex
-
-The  JavaScript runtime of  [Weex](http://weex.apache.org/)  is  different from browser and node.  you can also easily use fly in WeChat [Weex](http://weex.apache.org/)  application:
-
-```js
-// require "flyio/dist/npm/weex" instead
-var  Fly=require("flyio/dist/npm/weex")
-var fly=new Fly
-fly.get('/user?ID=12345')
-```
-## Using in Quick app
-
-The  JavaScript runtime of  [Quick App](https://www.quickapp.cn/)   is  different from other's.  you can also easily use fly in Quick App :
-
-```javascript
- var fetch = require("@system.fetch")
- var Fly=require("flyio/dist/npm/hap")
- var fly=new Fly(fetch)
- ...
- fly.get('test').then(...)
-```
-
-## Using in React Native
-
-Because XmlHttpRequest in the React Native JavaScript runtime is also available, fly is used the same way as in the browser.
 
 ## Size
 
