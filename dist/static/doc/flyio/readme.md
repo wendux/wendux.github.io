@@ -321,16 +321,19 @@ fly.interceptors.response.use(null,null)
 
 ## 错误处理
 
-请求失败之后，`catch` 捕获到的 err 为 Error 的一个实例，err有两个字段:
+请求失败之后，`catch` 捕获到的 err 为一个对象，它的字段如下:
 
 ```javascript
 {
   message:"Not Find 404", //错误消息
-  engine:{...}, //请求使用的http engine(见下面文档),浏览器中为本次请求的XMLHttpRequest对象
   status:404, //如果服务器可通，则为http请求状态码。网络异常时为0，网络超时为1
-  request:{...} //请求信息
+  request:{...}, //对应的请求信息
+  response:{}, //响应信息
+  engine:{}//请求使用的http engine(见下面文档),浏览器中为本次请求的XMLHttpRequest对象
 }
 ```
+
+**错误码**
 
 | 错误码   | 含义                         |
 | ----- | -------------------------- |
@@ -339,7 +342,26 @@ fly.interceptors.response.use(null,null)
 | 2     | 文件下载成功，但保存失败，此错误只出现node环境下 |
 | >=200 | http请求状态码                  |
 
+**示例**
 
+```javascript
+fly.get('/user/12345')
+  .catch(function (error) {
+    console.log('Error', error.message);
+    console.log('Error engine:', error.engine)
+    // The request was made but no response was received
+    // `error.request` holds the request info.
+    console.log('Error request info:',error.request);
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and 304
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.statusText);
+      console.log(error.response.headers);
+    }
+  });
+```
 
 ## 请求配置选项
 

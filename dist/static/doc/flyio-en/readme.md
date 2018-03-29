@@ -315,14 +315,15 @@ Whether in browser environment or in Node environment, Fly provides a unified Pr
 
 ## Error handling
 
-If  the request fails, `catch`  will be called;  the error object  is an instance of Error, and it has two fields :
+If  the request fails, `catch`  will be called;  the error object's  fields as follows :
 
 ```javascript
 {
   message:"Not Find 404", //error description
-  engine:{...}, //http engine,In browser,it's a instance of XMLHttpRequest.
   status:404, // error code
   request:{...}, //the request info
+  response:{...}, //the error response,
+  engine:{}, // The Http engine, it's a instance of XmlHttpRequest in browser.
 }
 ```
 
@@ -333,7 +334,26 @@ If  the request fails, `catch`  will be called;  the error object  is an instanc
 | 2     | The file was downloaded successfully, but the save failed. **This error only occurred in the node environment** |
 | >=200 | http status code                         |
 
+**Example**
 
+```javascript
+fly.get('/user/12345')
+  .catch(function (error) {
+    console.log('Error', error.message);
+    console.log('Error engine:', error.engine)
+    // The request was made but no response was received
+    // `error.request` holds the request info.
+    console.log('Error request info:',error.request);
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and 304
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.statusText);
+      console.log(error.response.headers);
+    }
+  });
+```
 
 ## Request configuration options
 
