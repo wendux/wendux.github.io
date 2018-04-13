@@ -89,7 +89,6 @@ fly.get("/test").then(d=>{
 
 所以要在拦截器中执行异步任务必须使用拦截器的`await(promise)`方法。
 
-this
 
 ### 在请求拦截器中执行异步任务
 
@@ -123,7 +122,7 @@ fly.interceptors.request.use(function (request) {
 })
 ```
 
-> 本示例中用到两个示例接口地址为: http://www.dtworkroom.com/doris/1/2.0.0/test和http://www.dtworkroom.com/doris/1/2.0.0/token 。 您可以直接在浏览器中打开这两个链接查看返回数据。值得一提的是这两个接口中的数据内容会根据随机算法动态生成，所以相同的接口，多次请求的结果可能会不同。
+> 本示例中用到两个示例接口地址为: http://www.dtworkroom.com/doris/1/2.0.0/test 和 http://www.dtworkroom.com/doris/1/2.0.0/token 。 您可以直接在浏览器中打开这两个链接查看返回数据。值得一提的是这两个接口中的数据内容会根据随机算法动态生成，所以相同的接口，多次请求的结果可能会不同。
 
 接下来我们发起三次请求：
 
@@ -193,7 +192,7 @@ fly.interceptors.response.use(
             ).then(() => {
                 log(`重新请求：path:${response.request.url}，baseURL:${response.request.baseURL}`)
               //使用当前fly实例，重新发起之前的网络请求
-              return fly.request(response.request); 
+              return fly.request(response.request);
             })
         }else{
             return response.data.data;
@@ -202,7 +201,7 @@ fly.interceptors.response.use(
 )
 ```
 
-上面的代码很简单，值得注意的是我们在`await()`返回的promise上添加了`then`，这并不会造成死锁，因为只有在执行传给await的promise过程中fly实例才会锁定，所以`then`里面的代码并不会被锁定。 
+上面的代码很简单，值得注意的是我们在`await()`返回的promise上添加了`then`，这并不会造成死锁，因为只有在执行传给await的promise过程中fly实例才会锁定，所以`then`里面的代码并不会被锁定。
 
 和请求拦截器中相同的是在执行`await()`提交的任务时fly实例会被锁定，新的请求将会进入到一个等待队列，同时锁定响应拦截器，也就是说，在响应拦截器中执行异步任务时，其余已经完成网络请求但还没进入响应拦截器的任务会在响应拦截器外排队，直到响应拦截器中的异步任务执行完成时，它们才会进入响应拦截器。这和请求拦截器设计初衷是相同的：避免不必要的重复请求。
 
@@ -232,7 +231,7 @@ fly.interceptors.request.use(function (request) {
         request.headers["csrfToken"] = csrfToken;
     }
 })
-//设置响应拦截器    
+//设置响应拦截器
 fly.interceptors.response.use(
     function (response) {
         log("interceptors.response", response)

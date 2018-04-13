@@ -89,7 +89,6 @@ fly.get("/test").then(d=>{
 
 所以要在拦截器中执行异步任务必须使用拦截器的`await(promise)`方法。
 
-this
 
 ### 在请求拦截器中执行异步任务
 
@@ -123,7 +122,7 @@ fly.interceptors.request.use(function (request) {
 })
 ```
 
-> 本示例中用到两个示例接口地址为: http://www.dtworkroom.com/doris/1/2.0.0/test和http://www.dtworkroom.com/doris/1/2.0.0/token 。 您可以直接在浏览器中打开这两个链接查看返回数据。值得一提的是这两个接口中的数据内容会根据随机算法动态生成，所以相同的接口，多次请求的结果可能会不同。
+> 本示例中用到两个示例接口地址为: http://www.dtworkroom.com/doris/1/2.0.0/test 和 http://www.dtworkroom.com/doris/1/2.0.0/token 。 您可以直接在浏览器中打开这两个链接查看返回数据。值得一提的是这两个接口中的数据内容会根据随机算法动态生成，所以相同的接口，多次请求的结果可能会不同。
 
 接下来我们发起三次请求：
 
