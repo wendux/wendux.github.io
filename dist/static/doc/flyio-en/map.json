@@ -15,16 +15,16 @@
           "file": "readme"
         },
         {
-          "title": "Node enhanced API",
-          "file": "node"
-        },
-        {
           "title": "Request configuration",
           "file": "config"
         },
         {
-          "title": "Request forwarding",
-          "file": "redirect"
+          "title": "Interceptors",
+          "file": "interceptors"
+        },
+        {
+          "title": "Node enhanced API",
+          "file": "node"
         },
         {
           "title": "Http Engine",

@@ -15,12 +15,16 @@
           "file": "readme"
         },
         {
-          "title": "Node下增强的API",
-          "file": "node"
-        },
-        {
           "title": "请求配置",
           "file": "config"
+        },
+        {
+          "title": "拦截器",
+          "file": "interceptors"
+        },
+        {
+          "title": "Node下增强的API",
+          "file": "node"
         },
         {
           "title": "请求重定向",
