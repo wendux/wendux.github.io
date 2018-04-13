@@ -20,7 +20,7 @@
         },
         {
           "title": "Interceptors",
-          "file": "interceptors"
+          "file": "interceptor"
         },
         {
           "title": "Node enhanced API",

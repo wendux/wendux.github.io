@@ -20,7 +20,7 @@
         },
         {
           "title": "拦截器",
-          "file": "interceptors"
+          "file": "interceptor"
         },
         {
           "title": "Node下增强的API",
