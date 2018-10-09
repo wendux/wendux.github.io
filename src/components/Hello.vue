@@ -40,7 +40,7 @@
         <a href="https://github.com/wendux/DSBridge-Android">DSBridge</a>
         <a href="https://wendux.github.io/dist/#/doc/flyio/readme">fly.js</a>
         <a href="https://github.com/wendux/ajax-hook">ajax-hook</a>
-        <a href="http://neat.dtworkroom.com/">neat.js</a>
+        <a href="https://github.com/flutterchina">flutter中文网</a>
         <a href="http://dspider.dtworkroom.com/">DSpider</a>
       </div>
     </div>
